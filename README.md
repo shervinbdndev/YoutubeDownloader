@@ -55,8 +55,6 @@ For Running in Python Console 👇
 
 Windows : `` py -m pip install -r requirements.txt ``
 
-<br>
-
 Linux : `` python3 -m pip install -r requrements.txt ``
 
 <br>
