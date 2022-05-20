@@ -67,4 +67,4 @@ Then Run the Code Below 👇
 ~ python YoutubeDownloader.py
 ```
 
-If You Want you can Use The Executable file in `` YoutubeDownloader `` and run `` YoutubeDownloader.exe ``
+If You Want you can Use The Executable file, Go to `` YoutubeDownloader `` and run `` YoutubeDownloader.exe ``
