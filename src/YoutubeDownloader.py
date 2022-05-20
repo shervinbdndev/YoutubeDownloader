@@ -7,7 +7,7 @@ try:
     from tkinter.font import BOLD
     from tkinter import filedialog
     from tkinter import messagebox
-    # from typing_extensions import Self
+    from typing_extensions import Self
     from tkinter.__init__ import (StringVar, Label)
     from customtkinter.widgets.customtkinter_entry import CTkEntry
     from customtkinter.widgets.customtkinter_button import CTkButton
@@ -23,7 +23,7 @@ finally:
 
 
 class YoutubeDownloader(tkinter.Tk):
-    def __init__(self) -> None:
+    def __init__(self : Self) -> None:
         self.root = tkinter.Tk()
         self.root.title(string='Youtube Downloader')
         self.root.geometry(newGeometry='550x300')
