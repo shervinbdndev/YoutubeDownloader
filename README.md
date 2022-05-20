@@ -1,5 +1,5 @@
 <div align="center">
-  <a href="https://github.com/shervinbdndev/CPUStatusChart">
+  <a href="https://github.com/shervinbdndev/YoutubeDownloader">
     <img src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/src/images/logo%403x.png" alt="Logo" width="250">
   </a>
 </div>
