@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://github.com/shervinbdndev/CPUStatusChart">
-    <img src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/src/images/logo%403x.png" alt="Logo" width="500">
+    <img src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/src/images/logo%403x.png" alt="Logo" width="250">
   </a>
 </div>
 <h1 align='center' style="font-size:5rem"><b>Youtube Downloader</b></h1>
