@@ -13,8 +13,8 @@ try:
     from customtkinter.widgets.customtkinter_button import CTkButton
     from customtkinter.widgets.customtkinter_checkbox import CTkCheckBox
 
-except:
-    ...
+except ModuleNotFoundError.__doc__ as mnfe:
+    raise mnfe
 
 finally:
     ...
