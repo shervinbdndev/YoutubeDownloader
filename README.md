@@ -9,15 +9,8 @@
   </p>
 
   <br><br>
-  <!-- <p align="center">
-  <img src="https://github.com/shervinbdndev/CPUStatusChart/blob/master/Preview/preview%403x.png" width="930" /> 
+  <p align="center">
+  <img src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/Preview/dl.gif" /> 
   <br>
-  <div align="center">
-    <p>Also You Can Run it on <b>Windows 11</b></p>  
-  </div>
-  <br>
-  <div align="center">
-    <img src="https://github.com/shervinbdndev/CPUStatusChart/blob/master/Preview/windows11.png" width="750"/>
-  </div> -->
 </p>
 </div>
