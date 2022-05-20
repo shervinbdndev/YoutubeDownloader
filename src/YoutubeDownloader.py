@@ -1,6 +1,5 @@
 try:
     import os
-    import pafy
     import tkinter
     import darkdetect
     import customtkinter
