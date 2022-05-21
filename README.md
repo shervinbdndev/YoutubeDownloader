@@ -8,7 +8,7 @@
     A Windows Open Source Application For Downloading Videos From Youtube
 </h2>
 <div align='center'>
-    <img style='border-radius:5px' src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/Preview/bd.gif"></img>
+    <img style='border-radius:5px' width='1080' src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/Preview/bd.gif"></img>
     <br><br>
     <img style='border-radius:5px' src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/Preview/dark.jpg"></img>
     <br><br>
