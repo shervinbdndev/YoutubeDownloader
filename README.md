@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://github.com/shervinbdndev/YoutubeDownloader">
-    <img src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/src/images/logo%403x.png" alt="Logo" width="250">
+    <img src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/src/images/logo%403x.png" alt="Logo" width="180">
   </a>
 </div>
 <h1 align='center' style="font-size:5rem"><b>Youtube Downloader</b><br>v 2.0.0</h1>
