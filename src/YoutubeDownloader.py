@@ -376,6 +376,5 @@ class YoutubeDownloader:
         
         self.root.mainloop()
         
-        
 if (__name__ == '__main__' and __package__ is None):
     YoutubeDownloader()
