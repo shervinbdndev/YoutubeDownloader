@@ -1,6 +1,7 @@
 try:
     import os
     import tkinter
+    import ntkutils
     import darkdetect
     import customtkinter
     from typing import Any
@@ -36,6 +37,7 @@ class YoutubeDownloader:
         self.svLink = StringVar(master=self.root)
         self.svPath = StringVar(master=self.root)
         self.svCombo = StringVar(master=self.root)
+        ntkutils.blur_window_background(window=self.root)
         
         def getTheme():
             if (darkdetect.isLight()):
