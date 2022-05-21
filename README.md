@@ -3,15 +3,20 @@
     <img src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/src/images/logo%403x.png" alt="Logo" width="250">
   </a>
 </div>
-<h1 align='center' style="font-size:5rem"><b>Youtube Downloader</b></h1>
-<h2 align='center'><b>Version 2.0.0</b></h2>
+<h1 align='center' style="font-size:5rem"><b>Youtube Downloader</b><br>v 2.0.0</h1>
 <h2 align='center'>
     A Windows Open Source Application For Downloading Videos From Youtube
 </h2>
 <div align='center'>
     <img style='border-radius:5px' src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/Preview/bd.gif"></img>
+    <br><br>
+    <img style='border-radius:5px' src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/Preview/dark.jpg"></img>
+    <br><br>
+    <img style='border-radius:5px' src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/Preview/light.jpg"></img>
 </div>
 <hr>
+
+<br><br><br>
 
 <h1 align='center'><b>Precendences</b></h1>
 
@@ -22,14 +27,14 @@
 - [x] Able To Set Theme as The System Theme
 
 <hr>
-<br>
+<br><br><br>
 <h1 align='center'><b>Language and technologies used in This Project</h1>
 <img src="https://img.shields.io/badge/Python-14354C?style=for-the-badge&logo=python&logoColor=white"></img>
 <img src="https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white"></img>
 <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></img>
 
 
-<br>
+<br><br><br>
 <h1 align='center'><b>WorkSpace</h1>
 <img src="https://img.shields.io/badge/Intel-Core_i5_10700K-0071C5?style=for-the-badge&logo=intel&logoColor=white"></img>
 <img src="https://img.shields.io/badge/NVIDIA-RTX2060 OC-76B900?style=for-the-badge&logo=nvidia&logoColor=white"></img>
@@ -39,7 +44,7 @@
 <hr>
 
 
-<br>
+<br><br><br>
 
 <h1 align='center'><b>How To Run</b></h1>
 
