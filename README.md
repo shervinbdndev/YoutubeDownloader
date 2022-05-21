@@ -4,13 +4,13 @@
   </a>
 </div>
 <h1 align='center' style="font-size:5rem"><b>Youtube Downloader</b></h1>
-<h2 align='center'><b>Version 1.0.8</b></h2>
+<h2 align='center'><b>Version 2.0.0</b></h2>
 <h2 align='center'>
     A Windows Open Source Application For Downloading Videos From Youtube
 </h2>
-<!-- <div align='center'>
-    <img src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/Preview/dl.gif"></img>
-</div> -->
+<div align='center'>
+    <img src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/Preview/bd.gif"></img>
+</div>
 <hr>
 
 <h1 align='center'><b>Precendences</b></h1>
