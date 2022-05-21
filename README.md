@@ -9,14 +9,16 @@
     A Windows Open Source Application For Downloading Videos From Youtube
 </h2>
 <div align='center'>
-    <img src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/Preview/bd.gif"></img>
+    <img style='border-radius:5px' src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/Preview/bd.gif"></img>
 </div>
 <hr>
 
 <h1 align='center'><b>Precendences</b></h1>
 
 - [x] Able To Download Highest & Lowest Quality
-- [x] Able To Show Download Staus (It may has Some Bugs)
+- [x] Able To Choose Between Qualities (From 360p to 1080p)
+- [x] Able To Download Audio Only
+- [x] Able To Show Download Staus
 - [x] Able To Set Theme as The System Theme
 
 <hr>
