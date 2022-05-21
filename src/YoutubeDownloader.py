@@ -37,7 +37,6 @@ class YoutubeDownloader:
         self.svLink = StringVar(master=self.root)
         self.svPath = StringVar(master=self.root)
         self.svCombo = StringVar(master=self.root)
-        ntkutils.blur_window_background(window=self.root)
         
         def getTheme():
             if (darkdetect.isLight()):
@@ -74,6 +73,7 @@ class YoutubeDownloader:
                 self.highestQualityBtn.configure(bg_color='#323331' , fg_color='#1D94D0')
                 self.lowestQualityBtn.configure(bg_color='#323331' , fg_color='#1D94D0')
                 self.browseSaveDialogLabel.configure(background='#323331' , foreground='#1D94D0')
+                ntkutils.dark_title_bar(window=self.root)
             self.tester.after(ms=2500 , func=getTheme)
             
         def browseFile(arg : Any):
