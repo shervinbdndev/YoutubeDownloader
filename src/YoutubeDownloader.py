@@ -1,7 +1,10 @@
 try:
     import os
+    import sv_ttk
     import tkinter
+    import requests
     import ntkutils
+    import webbrowser
     import darkdetect
     import customtkinter
     from typing import Any
@@ -10,7 +13,9 @@ try:
     from tkinter import filedialog
     from tkinter import messagebox
     from typing_extensions import Self
+    from tkinter.constants import BOTH
     from tkinter.font import (BOLD , NORMAL)
+    from tkinter.ttk import (Notebook , Frame)
     from tkinter.__init__ import (StringVar, Label)
     from customtkinter.widgets.customtkinter_entry import CTkEntry
     from customtkinter.widgets.customtkinter_button import CTkButton
@@ -31,153 +36,330 @@ class YoutubeDownloader:
         super(YoutubeDownloader , self).__init__()
         self.root = tkinter.Tk()
         self.root.title(string='Youtube Downloader')
-        self.root.geometry(newGeometry='855x270')
+        self.root.geometry(newGeometry='555x320')
         self.root.resizable(width=False , height=False)
+        self.rootTabControl = Notebook(master=self.root)
         self.tester = Label(master=self.root)
         self.svLink = StringVar(master=self.root)
         self.svPath = StringVar(master=self.root)
         self.svCombo = StringVar(master=self.root)
+        self.tabDownload = Frame(master=self.rootTabControl)
+        self.tabVidInfo = Frame(master=self.rootTabControl)
+        self.tabLanguage = Frame(master=self.root)
+        self.tabAbout = Frame(master=self.root)
+        self.rootTabControl.add(child=self.tabDownload , text='Download')
+        self.rootTabControl.add(child=self.tabVidInfo , text='Video Information')
+        self.rootTabControl.add(child=self.tabLanguage , text='Language')
+        self.rootTabControl.add(child=self.tabAbout , text='About')
+        self.rootTabControl.pack(expand=1 , fill=BOTH)
+        self.persian : bool = False
+        self.english : bool = True
         
         def getTheme():
             if (darkdetect.isLight()):
+                sv_ttk.set_theme(theme='light')
                 customtkinter.set_appearance_mode(mode_string='light')
-                self.root.configure(background='#F5EEDC')
-                self.linkEntry.configure(fg_color='#1D94D0')
-                self.linkDestination.configure(bg_color='#F5EEDC' , fg_color='#1D94D0')
-                self.downloadStatus.configure(background='#F5EEDC')
-                self.videoLinkLabel.configure(background='#F5EEDC' , foreground='#1D94D0')
-                self.videoLinkLabel.configure(background='#F5EEDC' , foreground='#1D94D0')
-                self.videoAuthorLabel.configure(background='#F5EEDC' , foreground='#1D94D0')
-                self.status.configure(background='#F5EEDC' , foreground='#1D94D0')
-                self.labelCheckBoxSelectInfo.configure(background='#F5EEDC' , foreground='#1D94D0')
-                self.svVideoAuthor.configure(background='#F5EEDC' , foreground='#000000')
-                self.svViewsCount.configure(background='#F5EEDC' , foreground='#000000')
-                self.viewsCount.configure(background='#F5EEDC' , foreground='#1D94D0')
-                self.highestQualityBtn.configure(bg_color='#F5EEDC' , fg_color='#1D94D0')
-                self.lowestQualityBtn.configure(bg_color='#F5EEDC' , fg_color='#1D94D0')
-                self.browseSaveDialogLabel.configure(background='#F5EEDC' , foreground='#1D94D0')
+                self.root.configure(background='#FAFAFA')
+                self.linkEntry.configure(bg_color='#FAFAFA' , fg_color='#1D94D0')
+                self.linkDestination.configure(bg_color='#FAFAFA' , fg_color='#1D94D0')
+                self.downloadStatus.configure(background='#FAFAFA')
+                self.videoLinkLabel.configure(background='#FAFAFA' , foreground='#1D94D0')
+                self.videoLinkLabel.configure(background='#FAFAFA' , foreground='#1D94D0')
+                self.videoAuthorLabel.configure(background='#FAFAFA' , foreground='#1D94D0')
+                self.status.configure(background='#FAFAFA' , foreground='#1D94D0')
+                self.labelCheckBoxSelectInfo.configure(background='#FAFAFA' , foreground='#1D94D0')
+                self.svVideoAuthor.configure(background='#FAFAFA' , foreground='#000000')
+                self.svViewsCount.configure(background='#FAFAFA' , foreground='#000000')
+                self.viewsCount.configure(background='#FAFAFA' , foreground='#1D94D0')
+                self.highestQualityBtn.configure(bg_color='#FAFAFA' , fg_color='#1D94D0')
+                self.lowestQualityBtn.configure(bg_color='#FAFAFA' , fg_color='#1D94D0')
+                self.btn1080.configure(bg_color='#FAFAFA' , fg_color='#1D94D0')
+                self.btn720.configure(bg_color='#FAFAFA' , fg_color='#1D94D0')
+                self.btn480.configure(bg_color='#FAFAFA' , fg_color='#1D94D0')
+                self.btn360.configure(bg_color='#FAFAFA' , fg_color='#1D94D0')
+                self.audioOnlybtn.configure(bg_color='#FAFAFA' , fg_color='#1D94D0')
+                self.browseSaveDialogLabel.configure(background='#FAFAFA' , foreground='#1D94D0')
+                self.labelVideoSecs.configure(background='#FAFAFA' , foreground='#000000')
+                self.svVideoSecs.configure(background='#FAFAFA' , foreground='#1D94D0')
+                self.labelVideoID.configure(background='#FAFAFA' , foreground='#1D94D0')
+                self.svVideoID.configure(background='#FAFAFA' , foreground='#000000')
+                self.labelChannelID.configure(background='#FAFAFA' , foreground='#1D94D0')
+                self.svChannelID.configure(background='#FAFAFA' , foreground='#000000')
+                self.labelLiveContent.configure(background='#FAFAFA' , foreground='#1D94D0')
+                self.svLiveContent.configure(background='#FAFAFA' , foreground='#000000')
+                self.labelIsPrivate.configure(background='#FAFAFA' , foreground='#1D94D0')
+                self.svIsPrivate.configure(background='#FAFAFA' , foreground='#000000')
             elif (darkdetect.isDark()):
+                sv_ttk.set_theme(theme='dark')
                 customtkinter.set_appearance_mode(mode_string='dark')
-                self.root.configure(background='#323331')
-                self.linkEntry.configure(fg_color='#1D94D0')
-                self.linkDestination.configure(bg_color='#323331' , fg_color='#1D94D0')
-                self.downloadStatus.configure(background='#323331')
-                self.videoLinkLabel.configure(background='#323331' , foreground='#1D94D0')
-                self.videoAuthorLabel.configure(background='#323331' , foreground='#1D94D0')
-                self.svVideoAuthor.configure(background='#323331' , foreground='#ffffff')
-                self.svViewsCount.configure(background='#323331' , foreground='#ffffff')
-                self.viewsCount.configure(background='#323331' , foreground='#1D94D0')
-                self.videoLinkLabel.configure(background='#323331' , foreground='#1D94D0')
-                self.status.configure(background='#323331' , foreground='#1D94D0')
-                self.labelCheckBoxSelectInfo.configure(background='#323331' , foreground='#1D94D0')
-                self.highestQualityBtn.configure(bg_color='#323331' , fg_color='#1D94D0')
-                self.lowestQualityBtn.configure(bg_color='#323331' , fg_color='#1D94D0')
-                self.browseSaveDialogLabel.configure(background='#323331' , foreground='#1D94D0')
+                self.root.configure(background='#1C1C1C')
+                self.linkEntry.configure(bg_color='#1C1C1C' , fg_color='#1D94D0')
+                self.linkDestination.configure(bg_color='#1C1C1C' , fg_color='#1D94D0')
+                self.downloadStatus.configure(background='#1C1C1C')
+                self.videoLinkLabel.configure(background='#1C1C1C' , foreground='#1D94D0')
+                self.videoAuthorLabel.configure(background='#1C1C1C' , foreground='#1D94D0')
+                self.svVideoAuthor.configure(background='#1C1C1C' , foreground='#ffffff')
+                self.svViewsCount.configure(background='#1C1C1C' , foreground='#ffffff')
+                self.viewsCount.configure(background='#1C1C1C' , foreground='#1D94D0')
+                self.videoLinkLabel.configure(background='#1C1C1C' , foreground='#1D94D0')
+                self.status.configure(background='#1C1C1C' , foreground='#1D94D0')
+                self.labelCheckBoxSelectInfo.configure(background='#1C1C1C' , foreground='#1D94D0')
+                self.highestQualityBtn.configure(bg_color='#1C1C1C' , fg_color='#1D94D0')
+                self.lowestQualityBtn.configure(bg_color='#1C1C1C' , fg_color='#1D94D0')
+                self.btn1080.configure(bg_color='#1C1C1C' , fg_color='#1D94D0')
+                self.btn720.configure(bg_color='#1C1C1C' , fg_color='#1D94D0')
+                self.btn480.configure(bg_color='#1C1C1C' , fg_color='#1D94D0')
+                self.btn360.configure(bg_color='#1C1C1C' , fg_color='#1D94D0')
+                self.audioOnlybtn.configure(bg_color='#1C1C1C' , fg_color='#1D94D0')
+                self.browseSaveDialogLabel.configure(background='#1C1C1C' , foreground='#1D94D0')
+                self.labelVideoSecs.configure(background='#1C1C1C' , foreground='#ffffff')
+                self.svVideoSecs.configure(background='#1C1C1C' , foreground='#1D94D0')
+                self.labelVideoID.configure(background='#1C1C1C' , foreground='#1D94D0')
+                self.svVideoID.configure(background='#1C1C1C' , foreground='#ffffff')
+                self.labelChannelID.configure(background='#1C1C1C' , foreground='#1D94D0')
+                self.svChannelID.configure(background='#1C1C1C' , foreground='#ffffff')
+                self.labelLiveContent.configure(background='#1C1C1C' , foreground='#1D94D0')
+                self.svLiveContent.configure(background='#1C1C1C' , foreground='#ffffff')
+                self.labelIsPrivate.configure(background='#1C1C1C' , foreground='#1D94D0')
+                self.svIsPrivate.configure(background='#1C1C1C' , foreground='#ffffff')
                 ntkutils.dark_title_bar(window=self.root)
-            self.tester.after(ms=2500 , func=getTheme)
+            self.tester.after(ms=2555 , func=getTheme)
             
         def browseFile(arg : Any):
             if (arg == 'browse'):
                 downloadDirectory = filedialog.askdirectory(initialdir=os.path.join(os.path.abspath(path=os.path.dirname(p=__file__))) , title='Save Video')
-                self.svPath.set(downloadDirectory)
+                self.svPath.set(value=downloadDirectory)
+                
+        def changeAppLanguage(arg : Any):
+            if (arg == 'pa'):
+                self.persian = True
+                self.english = False
+                self.root.title(string='یوتیوب دانلودر')
+                self.rootTabControl.add(child=self.tabDownload , text='دانلود')
+                self.rootTabControl.add(child=self.tabVidInfo , text='مشخصات ویدیو')
+                self.rootTabControl.add(child=self.tabLanguage , text='زبان')
+                self.rootTabControl.add(child=self.tabAbout , text='درباره')
+                self.videoLinkLabel.configure(text='لینک ویدیو :')
+                self.browseSaveDialogLabel.configure(text='محل ذخیره سازی :')
+                if (darkdetect.isDark()):
+                    self.btnDownload.configure(text='دانلود' , bg_color = '#1C1C1C')
+                    self.btnPaste.configure(text='الصاق' , bg_color = '#1C1C1C')
+                    self.btnBrowse.configure(text='انتخاب' , bg_color = '#1C1C1C')
+                    self.btnPA.configure(text='پارسی' , bg_color = '#1C1C1C')
+                    self.btnEN.configure(text='انگلیسی' , bg_color = '#1C1C1C')
+                    self.btnME.configure(text='گیتهاب' , bg_color = '#1C1C1C')
+                elif (darkdetect.isLight()):
+                    self.btnDownload.configure(text='دانلود' , bg_color = '#FAFAFA')
+                    self.btnPaste.configure(text='الصاق' , bg_color = '#FAFAFA')
+                    self.btnBrowse.configure(text='انتخاب' , bg_color = '#FAFAFA')
+                    self.btnPA.configure(text='پارسی' , bg_color = '#FAFAFA')
+                    self.btnEN.configure(text='انگلیسی' , bg_color = '#FAFAFA')
+                    self.btnME.configure(text='گیتهاب' , bg_color = '#FAFAFA')
+                self.status.configure(text='وضعیت :')
+                self.downloadStatus.configure(text='نامعلوم')
+                self.highestQualityBtn.configure(text='کیفیت بالاترین')
+                self.lowestQualityBtn.configure(text='کیفیت ترین پایین')
+                self.audioOnlybtn.configure(text='صدا فقط')
+                self.videoAuthorLabel.configure(text='منصف :')
+                self.viewsCount.configure(text='بازدید :')
+                self.svVideoSecs.configure(text='زمان :')
+                self.labelVideoID.configure(text='آی دی ویدیو :')
+                self.labelChannelID.configure(text='آی دی کانال :')
+                self.labelLiveContent.configure(text='زنده :')
+                self.labelIsPrivate.configure(text='مخفی :')
+            elif (arg == 'en'):
+                self.english = True
+                self.persian = False
+                self.root.title(string='Youtube Downloader')
+                self.rootTabControl.add(child=self.tabDownload , text='Download')
+                self.rootTabControl.add(child=self.tabVidInfo , text='Video Information')
+                self.rootTabControl.add(child=self.tabLanguage , text='Language')
+                self.rootTabControl.add(child=self.tabAbout , text='About')
+                self.videoLinkLabel.configure(text='Video Link :')
+                self.browseSaveDialogLabel.configure(text='Destination :')
+                if (darkdetect.isDark()):
+                    self.btnDownload.configure(text='Download' , bg_color = '#1C1C1C')
+                    self.btnPaste.configure(text='Paste' , bg_color = '#1C1C1C')
+                    self.btnBrowse.configure(text='Browse' , bg_color = '#1C1C1C')
+                    self.btnPA.configure(text='Persian' , bg_color = '#1C1C1C')
+                    self.btnEN.configure(text='English' , bg_color = '#1C1C1C')
+                    self.btnME.configure(text='Github' , bg_color = '#1C1C1C')
+                elif (darkdetect.isLight()):
+                    self.btnDownload.configure(text='Download' , bg_color = '#FAFAFA')
+                    self.btnPaste.configure(text='Paste' , bg_color = '#FAFAFA')
+                    self.btnBrowse.configure(text='Browse' , bg_color = '#FAFAFA')
+                self.status.configure(text='Status :')
+                self.downloadStatus.configure(text='Not Using')
+                self.highestQualityBtn.configure(text='Highest Quality')
+                self.lowestQualityBtn.configure(text='Lowest Quality')
+                self.audioOnlybtn.configure(text='Audio Only')
+                self.videoAuthorLabel.configure(text='Author :')
+                self.viewsCount.configure(text='Views :')
+                self.svVideoSecs.configure(text='Seconds :')
+                self.labelVideoID.configure(text='Video ID :')
+                self.labelChannelID.configure(text='Channel ID :')
+                self.labelLiveContent.configure(text='Live Content :')
+                self.labelIsPrivate.configure(text='Private :')
+                self.btnPA.configure(text='Persian' , bg_color = '#FAFAFA')
+                self.btnEN.configure(text='English' , bg_color = '#FAFAFA')
+                self.btnME.configure(text='Github' , bg_color = '#FAFAFA')
                 
         def startDownload():
             startThread = Thread(target=downloadVideo)
             startThread.start()
             
+        def pasteContent(arg : Any):
+            if (arg == 'paste'):
+                pastedContent = self.root.clipboard_get()
+                self.svLink.set(value=pastedContent)
+                
+        def aboutMe(arg : Any):
+            if (arg == 'me'):
+                webbrowser.open(url='https://github.com/shervinbdndev')
+            
         def getVideoInfo():
             try:
-                videoAuthor = YouTube(url=self.svLink.get()).vid_info['videoDetails']['author']
-                videoViews = f"{int(YouTube(url=self.svLink.get()).vid_info['videoDetails']['viewCount']):,}"
-                
-                self.svVideoAuthor.configure(text=videoAuthor)
-                self.svViewsCount.configure(text=videoViews)
-            except:
-                pass
+                self.svVideoAuthor.configure(text=YouTube(url=self.svLink.get()).vid_info['videoDetails']['author'])
+                self.svViewsCount.configure(text=f"{int(YouTube(url=self.svLink.get()).vid_info['videoDetails']['viewCount']):,}")
+                self.labelVideoSecs.configure(text=YouTube(url=self.svLink.get()).vid_info['videoDetails']['lengthSeconds'])
+                self.svVideoID.configure(text=YouTube(url=self.svLink.get()).vid_info['videoDetails']['videoId'])
+                self.svChannelID.configure(text=YouTube(url=self.svLink.get()).vid_info['videoDetails']['channelId'])
+                self.svLiveContent.configure(text=[True if str(YouTube(url=self.svLink.get()).vid_info['videoDetails']['isLiveContent']) == 1 else False])
+                self.svIsPrivate.configure(text=[True if str(YouTube(url=self.svLink.get()).vid_info['videoDetails']['isPrivate']) == 1 else False])
+            except requests.ConnectionError as e:
+                self.svVideoAuthor.configure(text=e.__doc__)
+                self.svViewsCount.configure(text=e.__doc__)
+                self.labelVideoSecs.configure(text=e.__doc__)
+                self.svVideoID.configure(text=e.__doc__)
+                self.svChannelID.configure(text=e.__doc__)
+                self.svLiveContent.configure(text=e.__doc__)
+                self.svIsPrivate.configure(text=e.__doc__)
                 
         def downloadVideo():
             if (self.svLink.get() is not None):
                 if (self.highestQualityBtn.check_state == True):
                     try:
-                        self.downloadStatus.configure(text='Downloading' , fg='#ffea00')
+                        if ((self.persian is True) and (self.english is False)):
+                            self.downloadStatus.configure(text='درحال دانلود' , fg='#b59b2a')
+                        elif ((self.english is True) and (self.persian is False)):
+                            self.downloadStatus.configure(text='Downloading' , fg='#b59b2a')
                         self.root.update()
                         video = YouTube(url=self.svLink.get())
                         getVideoInfo()
                         videoStream = video.streams.get_highest_resolution()
                         videoStream.download(self.svPath.get())
-                        self.downloadStatus.configure(text='Downloaded' , fg='#28A745')
+                        if ((self.persian is True) and (self.english is False)):
+                            self.downloadStatus.configure(text='دانلود شد' , fg='#28A745')
+                        elif ((self.english is True) and (self.persian is False)):
+                            self.downloadStatus.configure(text='Downloaded' , fg='#28A745')
                     except Exception:
                         self.downloadStatus.configure(text='Failed' , fg='#CA3E47')
                         self.root.update()
                 elif (self.lowestQualityBtn.check_state == True):
                     try:
-                        self.downloadStatus.configure(text='Downloading' , fg='#ffea00')
+                        if ((self.persian is True) and (self.english is False)):
+                            self.downloadStatus.configure(text='درحال دانلود' , fg='#b59b2a')
+                        elif ((self.english is True) and (self.persian is False)):
+                            self.downloadStatus.configure(text='Downloading' , fg='#b59b2a')
                         self.root.update()
                         video = YouTube(url=self.svLink.get())
                         getVideoInfo()
                         videoStream = video.streams.get_lowest_resolution()
                         videoStream.download(self.svPath.get())
-                        self.downloadStatus.configure(text='Downloaded' , fg='#28A745')
+                        if ((self.persian is True) and (self.english is False)):
+                            self.downloadStatus.configure(text='دانلود شد' , fg='#28A745')
+                        elif ((self.english is True) and (self.persian is False)):
+                            self.downloadStatus.configure(text='Downloaded' , fg='#28A745')
                     except Exception:
                         self.downloadStatus.configure(text='Failed' , fg='#CA3E47')
                         self.root.update()
                 elif (self.audioOnlybtn.check_state == True):
                     try:
-                        self.downloadStatus.configure(text='Downloading' , fg='#ffea00')
+                        if ((self.persian is True) and (self.english is False)):
+                            self.downloadStatus.configure(text='درحال دانلود' , fg='#b59b2a')
+                        elif ((self.english is True) and (self.persian is False)):
+                            self.downloadStatus.configure(text='Downloading' , fg='#b59b2a')
                         self.root.update()
                         video = YouTube(url=self.svLink.get())
                         getVideoInfo()
                         videoStream = video.streams.get_audio_only(subtype='mp4')
                         videoStream.download(self.svPath.get())
-                        self.downloadStatus.configure(text='Downloaded' , fg='#28A745')
+                        if ((self.persian is True) and (self.english is False)):
+                            self.downloadStatus.configure(text='دانلود شد' , fg='#28A745')
+                        elif ((self.english is True) and (self.persian is False)):
+                            self.downloadStatus.configure(text='Downloaded' , fg='#28A745')
                     except Exception:
                         self.downloadStatus.configure(text='Failed' , fg='#CA3E47')
                         self.root.update()
                 elif (self.btn1080.check_state == True):
                     try:
-                        self.downloadStatus.configure(text='Downloading' , fg='#ffea00')
+                        if ((self.persian is True) and (self.english is False)):
+                            self.downloadStatus.configure(text='درحال دانلود' , fg='#b59b2a')
+                        elif ((self.english is True) and (self.persian is False)):
+                            self.downloadStatus.configure(text='Downloading' , fg='#b59b2a')
                         self.root.update()
                         video = YouTube(url=self.svLink.get())
                         getVideoInfo()
                         videoStream = video.streams.get_by_resolution(resolution='1080p')
                         videoStream.download(self.svPath.get())
-                        self.downloadStatus.configure(text='Downloaded' , fg='#28A745')
+                        if ((self.persian is True) and (self.english is False)):
+                            self.downloadStatus.configure(text='دانلود شد' , fg='#28A745')
+                        elif ((self.english is True) and (self.persian is False)):
+                            self.downloadStatus.configure(text='Downloaded' , fg='#28A745')
                     except Exception:
                         self.downloadStatus.configure(text='Failed' , fg='#CA3E47')
                         self.root.update()
                 elif (self.btn720.check_state == True):
                     try:
-                        self.downloadStatus.configure(text='Downloading' , fg='#ffea00')
+                        if ((self.persian is True) and (self.english is False)):
+                            self.downloadStatus.configure(text='درحال دانلود' , fg='#b59b2a')
+                        elif ((self.english is True) and (self.persian is False)):
+                            self.downloadStatus.configure(text='Downloading' , fg='#b59b2a')
                         self.root.update()
                         video = YouTube(url=self.svLink.get())
                         getVideoInfo()
                         videoStream = video.streams.get_by_resolution(resolution='720p')
                         videoStream.download(self.svPath.get())
-                        self.downloadStatus.configure(text='Downloaded' , fg='#28A745')
+                        if ((self.persian is True) and (self.english is False)):
+                            self.downloadStatus.configure(text='دانلود شد' , fg='#28A745')
+                        elif ((self.english is True) and (self.persian is False)):
+                            self.downloadStatus.configure(text='Downloaded' , fg='#28A745')
                     except Exception:
                         self.downloadStatus.configure(text='Failed' , fg='#CA3E47')
                         self.root.update()
                 elif (self.btn480.check_state == True):
                     try:
-                        self.downloadStatus.configure(text='Downloading' , fg='#ffea00')
+                        if ((self.persian is True) and (self.english is False)):
+                            self.downloadStatus.configure(text='درحال دانلود' , fg='#b59b2a')
+                        elif ((self.english is True) and (self.persian is False)):
+                            self.downloadStatus.configure(text='Downloading' , fg='#b59b2a')
                         self.root.update()
                         video = YouTube(url=self.svLink.get())
                         getVideoInfo()
                         videoStream = video.streams.get_by_resolution(resolution='480p')
                         videoStream.download(self.svPath.get())
-                        self.downloadStatus.configure(text='Downloaded' , fg='#28A745')
+                        if ((self.persian is True) and (self.english is False)):
+                            self.downloadStatus.configure(text='دانلود شد' , fg='#28A745')
+                        elif ((self.english is True) and (self.persian is False)):
+                            self.downloadStatus.configure(text='Downloaded' , fg='#28A745')
                     except Exception:
                         self.downloadStatus.configure(text='Failed' , fg='#CA3E47')
                         self.root.update()
                 elif (self.btn360.check_state == True):
                     try:
-                        self.downloadStatus.configure(text='Downloading' , fg='#ffea00')
+                        if ((self.persian is True) and (self.english is False)):
+                            self.downloadStatus.configure(text='درحال دانلود' , fg='#b59b2a')
+                        elif ((self.english is True) and (self.persian is False)):
+                            self.downloadStatus.configure(text='Downloading' , fg='#b59b2a')
                         self.root.update()
                         video = YouTube(url=self.svLink.get())
                         getVideoInfo()
                         videoStream = video.streams.get_by_resolution(resolution='360p')
                         videoStream.download(self.svPath.get())
-                        self.downloadStatus.configure(text='Downloaded' , fg='#28A745')
+                        if ((self.persian is True) and (self.english is False)):
+                            self.downloadStatus.configure(text='دانلود شد' , fg='#28A745')
+                        elif ((self.english is True) and (self.persian is False)):
+                            self.downloadStatus.configure(text='Downloaded' , fg='#28A745')
                     except Exception:
                         self.downloadStatus.configure(text='Failed' , fg='#CA3E47')
                         self.root.update()
@@ -185,94 +367,142 @@ class YoutubeDownloader:
                 messagebox.askokcancel(title='Invalid Link' , message='Please Enter a Valid Link')
         
         def checkBoxesChecked():
-            if (self.highestQualityBtn.check_state is True):
-                self.labelCheckBoxSelectInfo.configure(text='You Can Only Select Highest')
+            if ((self.english is True) and (self.persian is False)):
+                if (self.highestQualityBtn.check_state is True):
+                    self.labelCheckBoxSelectInfo.configure(text='You Can Only Select Highest')
+                if (self.lowestQualityBtn.check_state is True):
+                    self.labelCheckBoxSelectInfo.configure(text='You Can Only Select Lowest')
+                if ((self.highestQualityBtn.check_state is False) and (self.lowestQualityBtn.check_state is False)):
+                    self.labelCheckBoxSelectInfo.configure(text='')
+                if (self.btn1080.check_state is True):
+                    self.labelCheckBoxSelectInfo.configure(text='You Can Only Select 1080p')
+                if (self.btn720.check_state is True):
+                    self.labelCheckBoxSelectInfo.configure(text='You Can Only Select 720p')
+                if (self.btn480.check_state is True):
+                    self.labelCheckBoxSelectInfo.configure(text='You Can Only Select 480p')
+                if (self.btn360.check_state is True):
+                    self.labelCheckBoxSelectInfo.configure(text='You Can Only Select 360p')
+                if ((self.btn1080.check_state is True) and (self.btn720.check_state is True)):
+                    self.labelCheckBoxSelectInfo.configure(text='You Can Select One Quality')
+                if ((self.btn1080.check_state is True) and (self.btn480.check_state is True)):
+                    self.labelCheckBoxSelectInfo.configure(text='You Can Select One Quality')
+                if ((self.btn1080.check_state is True) and (self.btn360.check_state is True)):
+                    self.labelCheckBoxSelectInfo.configure(text='You Can Select One Quality')
+                if ((self.btn720.check_state is True) and (self.btn1080.check_state is True)):
+                    self.labelCheckBoxSelectInfo.configure(text='You Can Select One Quality')
+                if ((self.btn720.check_state is True) and (self.btn480.check_state is True)):
+                    self.labelCheckBoxSelectInfo.configure(text='You Can Select One Quality')
+                if ((self.btn720.check_state is True) and (self.btn360.check_state is True)):
+                    self.labelCheckBoxSelectInfo.configure(text='You Can Select One Quality')
+                if ((self.btn480.check_state is True) and (self.btn1080.check_state is True)):
+                    self.labelCheckBoxSelectInfo.configure(text='You Can Select One Quality')
+                if ((self.btn480.check_state is True) and (self.btn720.check_state is True)):
+                    self.labelCheckBoxSelectInfo.configure(text='You Can Select One Quality')
+                if ((self.btn480.check_state is True) and (self.btn360.check_state is True)):
+                    self.labelCheckBoxSelectInfo.configure(text='You Can Select One Quality')
+                if ((self.btn360.check_state is True) and (self.btn1080.check_state is True)):
+                    self.labelCheckBoxSelectInfo.configure(text='You Can Select One Quality')
+                if ((self.btn360.check_state is True) and (self.btn720.check_state is True)):
+                    self.labelCheckBoxSelectInfo.configure(text='You Can Select One Quality')
+                if ((self.btn360.check_state is True) and (self.btn480.check_state is True)):
+                    self.labelCheckBoxSelectInfo.configure(text='You Can Select One Quality')
+            elif ((self.english is False) and (self.persian is True)):
+                if (self.highestQualityBtn.check_state is True):
+                    self.labelCheckBoxSelectInfo.configure(text='فقط میتوانید بالاترین کیفیت را انتخاب کنید')
+                if (self.lowestQualityBtn.check_state is True):
+                    self.labelCheckBoxSelectInfo.configure(text='فقط میتوانید پایین ترین کیفیت را انخاب کنید')
+                if ((self.highestQualityBtn.check_state is False) and (self.lowestQualityBtn.check_state is False)):
+                    self.labelCheckBoxSelectInfo.configure(text='')
+                if (self.btn1080.check_state is True):
+                    self.labelCheckBoxSelectInfo.configure(text='فقط میتوانید 1080 انتخاب کنید')
+                if (self.btn720.check_state is True):
+                    self.labelCheckBoxSelectInfo.configure(text='فقط میتوانید 720 انتخاب کنید')
+                if (self.btn480.check_state is True):
+                    self.labelCheckBoxSelectInfo.configure(text='فقط میتوانید 480 انتخاب کنید')
+                if (self.btn360.check_state is True):
+                    self.labelCheckBoxSelectInfo.configure(text='فقط میتوانید 360 انتخاب کنید')
+                if ((self.btn1080.check_state is True) and (self.btn720.check_state is True)):
+                    self.labelCheckBoxSelectInfo.configure(text='نمیتوانید چند کیفیت را انتخاب کنید')
+                if ((self.btn1080.check_state is True) and (self.btn480.check_state is True)):
+                    self.labelCheckBoxSelectInfo.configure(text='نمیتوانید چند کیفیت را انتخاب کنید')
+                if ((self.btn1080.check_state is True) and (self.btn360.check_state is True)):
+                    self.labelCheckBoxSelectInfo.configure(text='نمیتوانید چند کیفیت را انتخاب کنید')
+                if ((self.btn720.check_state is True) and (self.btn1080.check_state is True)):
+                    self.labelCheckBoxSelectInfo.configure(text='نمیتوانید چند کیفیت را انتخاب کنید')
+                if ((self.btn720.check_state is True) and (self.btn480.check_state is True)):
+                    self.labelCheckBoxSelectInfo.configure(text='نمیتوانید چند کیفیت را انتخاب کنید')
+                if ((self.btn720.check_state is True) and (self.btn360.check_state is True)):
+                    self.labelCheckBoxSelectInfo.configure(text='نمیتوانید چند کیفیت را انتخاب کنید')
+                if ((self.btn480.check_state is True) and (self.btn1080.check_state is True)):
+                    self.labelCheckBoxSelectInfo.configure(text='نمیتوانید چند کیفیت را انتخاب کنید')
+                if ((self.btn480.check_state is True) and (self.btn720.check_state is True)):
+                    self.labelCheckBoxSelectInfo.configure(text='نمیتوانید چند کیفیت را انتخاب کنید')
+                if ((self.btn480.check_state is True) and (self.btn360.check_state is True)):
+                    self.labelCheckBoxSelectInfo.configure(text='نمیتوانید چند کیفیت را انتخاب کنید')
+                if ((self.btn360.check_state is True) and (self.btn1080.check_state is True)):
+                    self.labelCheckBoxSelectInfo.configure(text='نمیتوانید چند کیفیت را انتخاب کنید')
+                if ((self.btn360.check_state is True) and (self.btn720.check_state is True)):
+                    self.labelCheckBoxSelectInfo.configure(text='نمیتوانید چند کیفیت را انتخاب کنید')
+                if ((self.btn360.check_state is True) and (self.btn480.check_state is True)):
+                    self.labelCheckBoxSelectInfo.configure(text='نمیتوانید چند کیفیت را انتخاب کنید')
                 
-            if (self.lowestQualityBtn.check_state is True):
-                self.labelCheckBoxSelectInfo.configure(text='You Can Only Select Lowest')
-                
-            if ((self.highestQualityBtn.check_state is False) and (self.lowestQualityBtn.check_state is False)):
-                self.labelCheckBoxSelectInfo.configure(text='')
-                
-            if (self.btn1080.check_state is True):
-                self.labelCheckBoxSelectInfo.configure(text='You Can Only Select 1080p')
-            if (self.btn720.check_state is True):
-                self.labelCheckBoxSelectInfo.configure(text='You Can Only Select 720p')
-            if (self.btn480.check_state is True):
-                self.labelCheckBoxSelectInfo.configure(text='You Can Only Select 480p')
-            if (self.btn360.check_state is True):
-                self.labelCheckBoxSelectInfo.configure(text='You Can Only Select 360p')
-            if ((self.btn1080.check_state is True) and (self.btn720.check_state is True)):
-                self.labelCheckBoxSelectInfo.configure(text='You Can Select One Quality')
-            if ((self.btn1080.check_state is True) and (self.btn480.check_state is True)):
-                self.labelCheckBoxSelectInfo.configure(text='You Can Select One Quality')
-            if ((self.btn1080.check_state is True) and (self.btn360.check_state is True)):
-                self.labelCheckBoxSelectInfo.configure(text='You Can Select One Quality')
-            if ((self.btn720.check_state is True) and (self.btn1080.check_state is True)):
-                self.labelCheckBoxSelectInfo.configure(text='You Can Select One Quality')
-            if ((self.btn720.check_state is True) and (self.btn480.check_state is True)):
-                self.labelCheckBoxSelectInfo.configure(text='You Can Select One Quality')
-            if ((self.btn720.check_state is True) and (self.btn360.check_state is True)):
-                self.labelCheckBoxSelectInfo.configure(text='You Can Select One Quality')
-            if ((self.btn480.check_state is True) and (self.btn1080.check_state is True)):
-                self.labelCheckBoxSelectInfo.configure(text='You Can Select One Quality')
-            if ((self.btn480.check_state is True) and (self.btn720.check_state is True)):
-                self.labelCheckBoxSelectInfo.configure(text='You Can Select One Quality')
-            if ((self.btn480.check_state is True) and (self.btn360.check_state is True)):
-                self.labelCheckBoxSelectInfo.configure(text='You Can Select One Quality')
-            if ((self.btn360.check_state is True) and (self.btn1080.check_state is True)):
-                self.labelCheckBoxSelectInfo.configure(text='You Can Select One Quality')
-            if ((self.btn360.check_state is True) and (self.btn720.check_state is True)):
-                self.labelCheckBoxSelectInfo.configure(text='You Can Select One Quality')
-            if ((self.btn360.check_state is True) and (self.btn480.check_state is True)):
-                self.labelCheckBoxSelectInfo.configure(text='You Can Select One Quality')
-        
         self.labelCheckBoxSelectInfo = Label(
-            master=self.root ,
+            master=self.tabDownload ,
             text= '',
             font=('normal' , 9 , BOLD)
         )
         
         self.labelCheckBoxSelectInfo.place(x=130 , y=150)
                     
-        self.status = Label(master=self.root , text='Status :' , font=('normal' , 12 , BOLD))
+        self.status = Label(master=self.tabDownload , text='Status :' , font=('normal' , 12 , BOLD))
         
-        self.status.place(x=600 , y=50)
+        self.status.place(x=315 , y=180)
                 
-        self.downloadStatus = Label(master=self.root , text=f'Not Using' , foreground='#ffea00' , font=('normal' , 10 , BOLD))
+        self.downloadStatus = Label(master=self.tabDownload , text=f'Not Using' , foreground='#b59b2a' , font=('normal' , 10 , BOLD))
         
-        self.downloadStatus.place(x=720 , y=61 , anchor=tkinter.CENTER)
+        self.downloadStatus.place(x=430 , y=192 , anchor=tkinter.CENTER)
             
-        self.videoLinkLabel = Label(master=self.root , text='Video Link :' , font=('normal' , 12 , BOLD))
+        self.videoLinkLabel = Label(master=self.tabDownload , text='Video Link :' , font=('normal' , 12 , BOLD))
         
         self.videoLinkLabel.place(x=20 , y=30)
         
         self.linkEntry = CTkEntry(
-            master=self.root ,
+            master=self.tabDownload ,
             textvariable=self.svLink ,
             corner_radius=5 ,
-            width=400 ,
-            justify=tkinter.CENTER
+            width=285 ,
+            justify=tkinter.LEFT
         )
         
         self.linkEntry.place(x=128 , y=28)
         
-        self.browseSaveDialogLabel = Label(master=self.root , text='Destination :' , font=('normal' , 12 , BOLD))
+        self.browseSaveDialogLabel = Label(master=self.tabDownload , text='Destination :' , font=('normal' , 12 , BOLD))
         
         self.browseSaveDialogLabel.place(x=12 , y=105)
         
         self.linkDestination = CTkEntry(
-            master=self.root ,
+            master=self.tabDownload ,
             textvariable=self.svPath ,
             corner_radius=5 ,
             width=285 ,
-            justify=tkinter.CENTER
+            justify=tkinter.LEFT
         )
         
         self.linkDestination.place(x=128 , y = 102)
         
+        self.btnPaste = CTkButton(
+            master=self.tabDownload ,
+            text='Paste' ,
+            corner_radius=5 ,
+            width=100 ,
+            command=lambda:pasteContent(arg='paste') ,
+            cursor='hand2'
+        )
+        
+        self.btnPaste.place(x=428 , y = 28)
+        
         self.btnBrowse = CTkButton(
-            master=self.root ,
+            master=self.tabDownload ,
             text='Browse' ,
             corner_radius=5 ,
             width=100 ,
@@ -283,7 +513,7 @@ class YoutubeDownloader:
         self.btnBrowse.place(x=428 , y = 102)
         
         self.btnDownload = CTkButton(
-            master=self.root ,
+            master=self.tabDownload ,
             text='Download' ,
             corner_radius=5 ,
             width=220 ,
@@ -291,10 +521,10 @@ class YoutubeDownloader:
             cursor='hand2'
         )
         
-        self.btnDownload.place(x=308 , y=192)
+        self.btnDownload.place(x=295 , y=225)
         
         self.highestQualityBtn = CTkCheckBox(
-            master=self.root ,
+            master=self.tabDownload ,
             text='Highest Quality' ,
             state=NORMAL ,
             command=checkBoxesChecked
@@ -303,7 +533,7 @@ class YoutubeDownloader:
         self.highestQualityBtn.place(x=130 , y = 180)
         
         self.lowestQualityBtn = CTkCheckBox(
-            master=self.root ,
+            master=self.tabDownload ,
             text='Lowest Quality' ,
             state=NORMAL ,
             command=checkBoxesChecked
@@ -312,7 +542,7 @@ class YoutubeDownloader:
         self.lowestQualityBtn.place(x=130 , y = 210)
         
         self.audioOnlybtn = CTkCheckBox(
-            master=self.root ,
+            master=self.tabDownload ,
             text='Audio Only' ,
             state=NORMAL ,
             command=checkBoxesChecked
@@ -321,7 +551,7 @@ class YoutubeDownloader:
         self.audioOnlybtn.place(x=130 , y = 240)
         
         self.btn1080 = CTkCheckBox(
-            master=self.root ,
+            master=self.tabDownload ,
             text='1080p' ,
             state=NORMAL ,
             command=checkBoxesChecked
@@ -330,7 +560,7 @@ class YoutubeDownloader:
         self.btn1080.place(x=15 , y=150)
         
         self.btn720 = CTkCheckBox(
-            master=self.root ,
+            master=self.tabDownload ,
             text='720p' ,
             state=NORMAL ,
             command=checkBoxesChecked
@@ -339,7 +569,7 @@ class YoutubeDownloader:
         self.btn720.place(x=15 , y=180)
         
         self.btn480 = CTkCheckBox(
-            master=self.root ,
+            master=self.tabDownload ,
             text='480p' ,
             state=NORMAL ,
             command=checkBoxesChecked
@@ -348,7 +578,7 @@ class YoutubeDownloader:
         self.btn480.place(x=15 , y=210)
         
         self.btn360 = CTkCheckBox(
-            master=self.root ,
+            master=self.tabDownload ,
             text='360p' ,
             state=NORMAL ,
             command=checkBoxesChecked
@@ -356,22 +586,95 @@ class YoutubeDownloader:
         
         self.btn360.place(x=15 , y=240)
         
-        self.videoAuthorLabel = Label(master=self.root , text='Author :' , font=('normal' , 12 , BOLD))
+        self.btnPA = CTkButton(
+            master=self.tabLanguage ,
+            text='Persian' ,
+            corner_radius=5 ,
+            width=150 ,
+            command=lambda:changeAppLanguage(arg='pa') ,
+            cursor='hand2'
+        )
         
-        self.videoAuthorLabel.place(x=596.6 , y=112)
+        self.btnPA.place(relx=0.2 , rely=0.5 , anchor=tkinter.W)
         
-        self.svVideoAuthor = Label(master=self.root , text='' , font=('normal' , 10 , BOLD))
+        self.btnEN = CTkButton(
+            master=self.tabLanguage ,
+            text='English' ,
+            corner_radius=5 ,
+            width=150 ,
+            command=lambda:changeAppLanguage(arg='en') ,
+            cursor='hand2'
+        )
         
-        self.svVideoAuthor.place(x=690 , y=112)
+        self.btnEN.place(relx=0.5 , rely=0.5 , anchor=tkinter.W)
         
-        self.viewsCount = Label(master=self.root , text='Views :' , font=('normal' , 12 , BOLD))
+        self.btnME = CTkButton(
+            master=self.tabAbout ,
+            text='Github' ,
+            corner_radius=5 ,
+            width=150 ,
+            command=lambda:aboutMe(arg='me') ,
+            cursor='hand2'
+        )
         
-        self.viewsCount.place(x=601.5 , y=175)
+        self.btnME.place(relx=0.5 , rely=0.5 , anchor=tkinter.CENTER)
         
-        self.svViewsCount = Label(master=self.root , text='' , font=('normal' , 10 , BOLD))
+        self.videoAuthorLabel = Label(master=self.tabVidInfo , text='Author :' , font=('normal' , 12 , BOLD))
         
-        self.svViewsCount.place(x=690 , y=175)
+        self.videoAuthorLabel.place(x=2 , y=15 + 5)
+        
+        self.svVideoAuthor = Label(master=self.tabVidInfo , text=None , font=('normal' , 10 , BOLD))
+        
+        self.svVideoAuthor.place(x=90 , y=15 + 5)
+        
+        self.viewsCount = Label(master=self.tabVidInfo , text='Views :' , font=('normal' , 12 , BOLD))
+        
+        self.viewsCount.place(x=2 , y=50 + 5)
+        
+        self.svViewsCount = Label(master=self.tabVidInfo , text=None , font=('normal' , 10 , BOLD))
+        
+        self.svViewsCount.place(x=90 , y=50 + 5)
+        
+        self.svVideoSecs = Label(master=self.tabVidInfo , text='Seconds :' , font=('normal' , 12 , BOLD))
+        
+        self.svVideoSecs.place(x=2 , y=85 + 5)
+        
+        self.labelVideoSecs = Label(master=self.tabVidInfo , text=None , font=('normal' , 10 , BOLD))
+        
+        self.labelVideoSecs.place(x=111 , y=85 + 5)
+        
+        self.labelVideoID = Label(master=self.tabVidInfo , text='Video ID :' , font=('normal' , 12 , BOLD))
+        
+        self.labelVideoID.place(x=2 , y=120 + 5)
+        
+        self.svVideoID = Label(master=self.tabVidInfo , text=None , font=('normal' , 10 , BOLD))
             
+        self.svVideoID.place(x=111 , y=120 + 5)
+        
+        self.labelChannelID = Label(master=self.tabVidInfo , text='Channel ID :' , font=('normal' , 12 , BOLD))
+        
+        self.labelChannelID.place(x=2 , y=155 + 5)
+        
+        self.svChannelID = Label(master=self.tabVidInfo , text=None , font=('normal' , 10 , BOLD))
+        
+        self.svChannelID.place(x=130 , y=155 + 5)
+        
+        self.labelLiveContent = Label(master=self.tabVidInfo , text='Live Content :' , font=('normal' , 12 , BOLD))
+        
+        self.labelLiveContent.place(x=2 , y=190 + 5)
+        
+        self.svLiveContent = Label(master=self.tabVidInfo , text=None , font=('normal' , 10 , BOLD))
+        
+        self.svLiveContent.place(x=140 , y=190 + 5)
+        
+        self.labelIsPrivate = Label(master=self.tabVidInfo , text='Private :' , font=('normal' , 12 , BOLD))
+        
+        self.labelIsPrivate.place(x=2 , y=225 + 5)
+        
+        self.svIsPrivate = Label(master=self.tabVidInfo , text=None , font=('normal' , 10 , BOLD))
+        
+        self.svIsPrivate.place(x=97 , y=225 + 5)
+        
         getTheme()
         
         self.root.mainloop()

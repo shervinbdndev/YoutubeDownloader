@@ -3,7 +3,7 @@
     <img src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/src/images/logo%403x.png" alt="Logo" width="180">
   </a>
 </div>
-<h1 align='center' style="font-size:5rem"><b>Youtube Downloader</b><br>v 2.0.0</h1>
+<h1 align='center' style="font-size:5rem"><b>Youtube Downloader</b><br>v 2.0.1</h1>
 <h2 align='center'>
     A Windows Open Source Application For Downloading Videos From Youtube
 </h2>
@@ -22,6 +22,7 @@
 
 - [x] Able To Download Highest & Lowest Quality
 - [x] Able To Choose Between Qualities (From 360p to 1080p)
+- [x] Able To Change Between Languages (Persian & English)
 - [x] Able To Download Audio Only
 - [x] Able To Show Download Staus
 - [x] Able To Set Theme as The System Theme
