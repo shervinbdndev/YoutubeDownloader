@@ -26,6 +26,18 @@ except ModuleNotFoundError.__doc__ as mnfe:
 
 finally:
     ... 
+    
+    
+    
+
+
+class LengthSize:
+    def getSize(bytes , default = '') -> str:
+        for unit in ['' , 'KB' , 'MB' , 'GB' , 'TB' , 'PB']:
+            if (bytes < 1024):
+                return f'{bytes:.2f}{unit}{default}'
+            bytes /= 1024
+
 
     
 
@@ -89,7 +101,7 @@ class YoutubeDownloader:
                 self.svChannelID.configure(background='#FAFAFA' , foreground='#000000')
                 self.labelLiveContent.configure(background='#FAFAFA' , foreground='#1D94D0')
                 self.svLiveContent.configure(background='#FAFAFA' , foreground='#000000')
-                self.labelIsPrivate.configure(background='#FAFAFA' , foreground='#1D94D0')
+                self.labelLengthSize.configure(background='#FAFAFA' , foreground='#1D94D0')
                 self.svVideoSize.configure(background='#FAFAFA' , foreground='#000000')
             elif (darkdetect.isDark()):
                 sv_ttk.set_theme(theme='dark')
@@ -124,7 +136,7 @@ class YoutubeDownloader:
                 self.svChannelID.configure(background='#1C1C1C' , foreground='#ffffff')
                 self.labelLiveContent.configure(background='#1C1C1C' , foreground='#1D94D0')
                 self.svLiveContent.configure(background='#1C1C1C' , foreground='#ffffff')
-                self.labelIsPrivate.configure(background='#1C1C1C' , foreground='#1D94D0')
+                self.labelLengthSize.configure(background='#1C1C1C' , foreground='#1D94D0')
                 self.svVideoSize.configure(background='#1C1C1C' , foreground='#ffffff')
                 self.btnME.configure(bg_color='#1C1C1C' , fg_color='#1D94D0')
                 ntkutils.dark_title_bar(window=self.root)
@@ -171,7 +183,7 @@ class YoutubeDownloader:
                 self.labelVideoID.configure(text='آی دی ویدیو :')
                 self.labelChannelID.configure(text='آی دی کانال :')
                 self.labelLiveContent.configure(text='زنده :')
-                self.labelIsPrivate.configure(text='مخفی :')
+                self.labelLengthSize.configure(text='حجم ویدیو :')
             elif (arg == 'en'):
                 self.english = True
                 self.persian = False
@@ -204,7 +216,7 @@ class YoutubeDownloader:
                 self.labelVideoID.configure(text='Video ID :')
                 self.labelChannelID.configure(text='Channel ID :')
                 self.labelLiveContent.configure(text='Live Content :')
-                self.labelIsPrivate.configure(text='Private :')
+                self.labelLengthSize.configure(text='Length Size :')
                 self.btnPA.configure(text='Persian' , bg_color = '#FAFAFA')
                 self.btnEN.configure(text='English' , bg_color = '#FAFAFA')
                 self.btnME.configure(text='Github' , bg_color = '#FAFAFA')
@@ -230,7 +242,6 @@ class YoutubeDownloader:
                 self.svVideoID.configure(text=YouTube(url=self.svLink.get()).vid_info['videoDetails']['videoId'])
                 self.svChannelID.configure(text=YouTube(url=self.svLink.get()).vid_info['videoDetails']['channelId'])
                 self.svLiveContent.configure(text=[True if str(YouTube(url=self.svLink.get()).vid_info['videoDetails']['isLiveContent']) == 1 else False])
-                self.svVideoSize.configure(text=[True if str(YouTube(url=self.svLink.get()).vid_info['videoDetails']['isPrivate']) == 1 else False])
             except requests.ConnectionError as e:
                 self.svVideoAuthor.configure(text=e.__doc__)
                 self.svViewsCount.configure(text=e.__doc__)
@@ -252,14 +263,19 @@ class YoutubeDownloader:
                         video = YouTube(url=self.svLink.get())
                         getVideoInfo()
                         videoStream = video.streams.get_highest_resolution()
+                        self.svVideoSize.configure(text=LengthSize.getSize(videoStream.filesize))
                         videoStream.download(self.svPath.get())
                         if ((self.persian is True) and (self.english is False)):
                             self.downloadStatus.configure(text='دانلود شد' , fg='#28A745')
                         elif ((self.english is True) and (self.persian is False)):
                             self.downloadStatus.configure(text='Downloaded' , fg='#28A745')
                     except Exception:
-                        self.downloadStatus.configure(text='Failed' , fg='#CA3E47')
-                        self.root.update()
+                        if ((self.english is True) and (self.persian is False)):
+                            self.downloadStatus.configure(text='Failed' , fg='#CA3E47')
+                            self.root.update()
+                        elif ((self.english is False) and (self.persian is True)):
+                            self.downloadStatus.configure(text='ناموفق' , fg='#CA3B47')
+                            self.root.update()
                 elif (self.lowestQualityBtn.check_state == True):
                     try:
                         if ((self.persian is True) and (self.english is False)):
@@ -270,14 +286,19 @@ class YoutubeDownloader:
                         video = YouTube(url=self.svLink.get())
                         getVideoInfo()
                         videoStream = video.streams.get_lowest_resolution()
+                        self.svVideoSize.configure(text=LengthSize.getSize(videoStream.filesize))
                         videoStream.download(self.svPath.get())
                         if ((self.persian is True) and (self.english is False)):
                             self.downloadStatus.configure(text='دانلود شد' , fg='#28A745')
                         elif ((self.english is True) and (self.persian is False)):
                             self.downloadStatus.configure(text='Downloaded' , fg='#28A745')
                     except Exception:
-                        self.downloadStatus.configure(text='Failed' , fg='#CA3E47')
-                        self.root.update()
+                        if ((self.english is True) and (self.persian is False)):
+                            self.downloadStatus.configure(text='Failed' , fg='#CA3E47')
+                            self.root.update()
+                        elif ((self.english is False) and (self.persian is True)):
+                            self.downloadStatus.configure(text='ناموفق' , fg='#CA3B47')
+                            self.root.update()
                 elif (self.audioOnlybtn.check_state == True):
                     try:
                         if ((self.persian is True) and (self.english is False)):
@@ -288,14 +309,19 @@ class YoutubeDownloader:
                         video = YouTube(url=self.svLink.get())
                         getVideoInfo()
                         videoStream = video.streams.get_audio_only(subtype='mp4')
+                        self.svVideoSize.configure(text=LengthSize.getSize(videoStream.filesize))
                         videoStream.download(self.svPath.get())
                         if ((self.persian is True) and (self.english is False)):
                             self.downloadStatus.configure(text='دانلود شد' , fg='#28A745')
                         elif ((self.english is True) and (self.persian is False)):
                             self.downloadStatus.configure(text='Downloaded' , fg='#28A745')
                     except Exception:
-                        self.downloadStatus.configure(text='Failed' , fg='#CA3E47')
-                        self.root.update()
+                        if ((self.english is True) and (self.persian is False)):
+                            self.downloadStatus.configure(text='Failed' , fg='#CA3E47')
+                            self.root.update()
+                        elif ((self.english is False) and (self.persian is True)):
+                            self.downloadStatus.configure(text='ناموفق' , fg='#CA3B47')
+                            self.root.update()
                 elif (self.btn1080.check_state == True):
                     try:
                         if ((self.persian is True) and (self.english is False)):
@@ -306,14 +332,19 @@ class YoutubeDownloader:
                         video = YouTube(url=self.svLink.get())
                         getVideoInfo()
                         videoStream = video.streams.get_by_resolution(resolution='1080p')
+                        self.svVideoSize.configure(text=LengthSize.getSize(videoStream.filesize))
                         videoStream.download(self.svPath.get())
                         if ((self.persian is True) and (self.english is False)):
                             self.downloadStatus.configure(text='دانلود شد' , fg='#28A745')
                         elif ((self.english is True) and (self.persian is False)):
                             self.downloadStatus.configure(text='Downloaded' , fg='#28A745')
                     except Exception:
-                        self.downloadStatus.configure(text='Failed' , fg='#CA3E47')
-                        self.root.update()
+                        if ((self.english is True) and (self.persian is False)):
+                            self.downloadStatus.configure(text='Failed' , fg='#CA3E47')
+                            self.root.update()
+                        elif ((self.english is False) and (self.persian is True)):
+                            self.downloadStatus.configure(text='ناموفق' , fg='#CA3B47')
+                            self.root.update()
                 elif (self.btn720.check_state == True):
                     try:
                         if ((self.persian is True) and (self.english is False)):
@@ -324,14 +355,19 @@ class YoutubeDownloader:
                         video = YouTube(url=self.svLink.get())
                         getVideoInfo()
                         videoStream = video.streams.get_by_resolution(resolution='720p')
+                        self.svVideoSize.configure(text=LengthSize.getSize(videoStream.filesize))
                         videoStream.download(self.svPath.get())
                         if ((self.persian is True) and (self.english is False)):
                             self.downloadStatus.configure(text='دانلود شد' , fg='#28A745')
                         elif ((self.english is True) and (self.persian is False)):
                             self.downloadStatus.configure(text='Downloaded' , fg='#28A745')
                     except Exception:
-                        self.downloadStatus.configure(text='Failed' , fg='#CA3E47')
-                        self.root.update()
+                        if ((self.english is True) and (self.persian is False)):
+                            self.downloadStatus.configure(text='Failed' , fg='#CA3E47')
+                            self.root.update()
+                        elif ((self.english is False) and (self.persian is True)):
+                            self.downloadStatus.configure(text='ناموفق' , fg='#CA3B47')
+                            self.root.update()
                 elif (self.btn480.check_state == True):
                     try:
                         if ((self.persian is True) and (self.english is False)):
@@ -342,14 +378,19 @@ class YoutubeDownloader:
                         video = YouTube(url=self.svLink.get())
                         getVideoInfo()
                         videoStream = video.streams.get_by_resolution(resolution='480p')
+                        self.svVideoSize.configure(text=LengthSize.getSize(videoStream.filesize))
                         videoStream.download(self.svPath.get())
                         if ((self.persian is True) and (self.english is False)):
                             self.downloadStatus.configure(text='دانلود شد' , fg='#28A745')
                         elif ((self.english is True) and (self.persian is False)):
                             self.downloadStatus.configure(text='Downloaded' , fg='#28A745')
                     except Exception:
-                        self.downloadStatus.configure(text='Failed' , fg='#CA3E47')
-                        self.root.update()
+                        if ((self.english is True) and (self.persian is False)):
+                            self.downloadStatus.configure(text='Failed' , fg='#CA3E47')
+                            self.root.update()
+                        elif ((self.english is False) and (self.persian is True)):
+                            self.downloadStatus.configure(text='ناموفق' , fg='#CA3B47')
+                            self.root.update()
                 elif (self.btn360.check_state == True):
                     try:
                         if ((self.persian is True) and (self.english is False)):
@@ -360,14 +401,19 @@ class YoutubeDownloader:
                         video = YouTube(url=self.svLink.get())
                         getVideoInfo()
                         videoStream = video.streams.get_by_resolution(resolution='360p')
+                        self.svVideoSize.configure(text=LengthSize.getSize(videoStream.filesize))
                         videoStream.download(self.svPath.get())
                         if ((self.persian is True) and (self.english is False)):
                             self.downloadStatus.configure(text='دانلود شد' , fg='#28A745')
                         elif ((self.english is True) and (self.persian is False)):
                             self.downloadStatus.configure(text='Downloaded' , fg='#28A745')
                     except Exception:
-                        self.downloadStatus.configure(text='Failed' , fg='#CA3E47')
-                        self.root.update()
+                        if ((self.english is True) and (self.persian is False)):
+                            self.downloadStatus.configure(text='Failed' , fg='#CA3E47')
+                            self.root.update()
+                        elif ((self.english is False) and (self.persian is True)):
+                            self.downloadStatus.configure(text='ناموفق' , fg='#CA3B47')
+                            self.root.update()
             else:
                 messagebox.askokcancel(title='Invalid Link' , message='Please Enter a Valid Link')
         
@@ -672,13 +718,13 @@ class YoutubeDownloader:
         
         self.svLiveContent.place(x=140 , y=190 + 5)
         
-        self.labelIsPrivate = Label(master=self.tabVidInfo , text='Private :' , font=('normal' , 12 , BOLD))
+        self.labelLengthSize = Label(master=self.tabVidInfo , text='Length Size :' , font=('normal' , 12 , BOLD))
         
-        self.labelIsPrivate.place(x=2 , y=225 + 5)
+        self.labelLengthSize.place(x=2 , y=225 + 5)
         
         self.svVideoSize = Label(master=self.tabVidInfo , text=None , font=('normal' , 10 , BOLD))
         
-        self.svVideoSize.place(x=97 , y=225 + 5)
+        self.svVideoSize.place(x=110 , y=225 + 5)
         
         getTheme()
         
