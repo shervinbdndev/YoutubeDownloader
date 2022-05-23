@@ -2,7 +2,7 @@
   <a href="https://github.com/shervinbdndev/YoutubeDownloader">
     <img src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/src/images/logo%403x.png" alt="Logo" width="180">
   </a>
-  <h1 align='center' style="font-size:5rem"><b>Youtube Downloader</b><br>v 2.0.2</h1>
+  <h1 align='center' style="font-size:5rem"><b>Youtube Downloader</b></h1>
 
 Operating System  |  Version  |  Download
 ------------- | ------------- | -------------
