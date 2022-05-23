@@ -10,30 +10,32 @@ Windows 11  | Latest 2.0.2  | [64Bit](https://github.com/shervinbdndev/YoutubeDo
 Windows 10  | Latest 2.0.2  | [64Bit](https://github.com/shervinbdndev/YoutubeDownloader/archive/refs/heads/master.zip)
 
 </div>
-<br><br>
+<br><br><br>
 <h2 align='center'>
     A Windows Open Source Application For Downloading Videos From Youtube
 </h2>
 
-<br><br>
+<br><br><br>
 <div align='center'>
     <p>English Version</p>
     <img style='border-radius:5px' width='1080' src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/Preview/bd_en.gif"></img>
-    <br><br>
+    <br><br><br>
     <p>Persian Version</p>
     <img style='border-radius:5px' width='1080' src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/Preview/bd_pa.gif"></img>
-    <br><br>
+    <br><br><br>
+    <p>English Dark & Light Modes</p>
     <img style='border-radius:5px' src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/Preview/dark_en.jpg"></img>
-    <br><br>
-    <img style='border-radius:5px' src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/Preview/dark_pa.jpg"></img>
-    <br><br>
+    <br>
     <img style='border-radius:5px' src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/Preview/light_en.jpg"></img>
-    <br><br>
+    <br><br><br>
+    <p>Persian Dark & Light Modes</p>
+    <img style='border-radius:5px' src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/Preview/dark_pa.jpg"></img>
+    <br>
     <img style='border-radius:5px' src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/Preview/light_pa.jpg"></img>
 </div>
 <hr>
 
-<br><br><br>
+<br><br><br><br>
 
 <h1 align='center'><b>Precendences</b></h1>
 
@@ -46,14 +48,14 @@ Windows 10  | Latest 2.0.2  | [64Bit](https://github.com/shervinbdndev/YoutubeDo
 - [x] Able To Set Theme as The System Theme
 
 <hr>
-<br><br><br>
+<br><br><br><br>
 <h1 align='center'><b>Language and technologies used in This Project</h1>
 <img src="https://img.shields.io/badge/Python-14354C?style=for-the-badge&logo=python&logoColor=white"></img>
 <img src="https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white"></img>
 <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></img>
 
 
-<br><br><br>
+<br><br><br><br>
 <h1 align='center'><b>WorkSpace</h1>
 <img src="https://img.shields.io/badge/Intel-Core_i5_10700K-0071C5?style=for-the-badge&logo=intel&logoColor=white"></img>
 <img src="https://img.shields.io/badge/NVIDIA-RTX2060 OC-76B900?style=for-the-badge&logo=nvidia&logoColor=white"></img>
@@ -63,7 +65,7 @@ Windows 10  | Latest 2.0.2  | [64Bit](https://github.com/shervinbdndev/YoutubeDo
 <hr>
 
 
-<br><br><br>
+<br><br><br><br>
 
 <h1 align='center'><b>How To Run</b></h1>
 
