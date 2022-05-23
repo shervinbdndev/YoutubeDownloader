@@ -6,8 +6,8 @@
 
 Operating System  |  Version  |  Download
 ------------- | ------------- | -------------
-Windows 11  |  2.0.2  | [64Bit](https://github.com/shervinbdndev/YoutubeDownloader/archive/refs/heads/master.zip)
-Windows 10  |  2.0.2  | [64Bit](https://github.com/shervinbdndev/YoutubeDownloader/archive/refs/heads/master.zip)
+Windows 11  | Latest 2.0.2  | [64Bit](https://github.com/shervinbdndev/YoutubeDownloader/archive/refs/heads/master.zip)
+Windows 10  | Latest 2.0.2  | [64Bit](https://github.com/shervinbdndev/YoutubeDownloader/archive/refs/heads/master.zip)
 
 </div>
 <br><br>
