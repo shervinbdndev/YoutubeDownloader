@@ -8,6 +8,13 @@
     A Windows Open Source Application For Downloading Videos From Youtube
 </h2>
 <br><br>
+
+Operatin System  |  Download
+------------- | -------------
+Windows 11  | [64Bit](https://github.com/shervinbdndev/YoutubeDownloader/archive/refs/heads/master.zip)
+Windows 10  | [64Bit](https://github.com/shervinbdndev/YoutubeDownloader/archive/refs/heads/master.zip)
+
+<br><br>
 <div align='center'>
     <p>English Version</p>
     <img style='border-radius:5px' width='1080' src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/Preview/bd_en.gif"></img>
