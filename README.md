@@ -11,10 +11,10 @@
 
 <div align="center">
 
-Operating System  |  Download
-------------- | -------------
-Windows 11  | [64Bit](https://github.com/shervinbdndev/YoutubeDownloader/archive/refs/heads/master.zip)
-Windows 10  | [64Bit](https://github.com/shervinbdndev/YoutubeDownloader/archive/refs/heads/master.zip)
+Operating System  |  Version  |  Download
+------------- | ------------- | -------------
+Windows 11  |  2.0.2  | [64Bit](https://github.com/shervinbdndev/YoutubeDownloader/archive/refs/heads/master.zip)
+Windows 10  |  2.0.2  | [64Bit](https://github.com/shervinbdndev/YoutubeDownloader/archive/refs/heads/master.zip)
 
 </div>
 
