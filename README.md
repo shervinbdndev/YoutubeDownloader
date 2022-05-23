@@ -3,16 +3,25 @@
     <img src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/src/images/logo%403x.png" alt="Logo" width="180">
   </a>
 </div>
-<h1 align='center' style="font-size:5rem"><b>Youtube Downloader</b><br>v 2.0.1</h1>
+<h1 align='center' style="font-size:5rem"><b>Youtube Downloader</b><br>v 2.0.2</h1>
 <h2 align='center'>
     A Windows Open Source Application For Downloading Videos From Youtube
 </h2>
+<br><br>
 <div align='center'>
-    <img style='border-radius:5px' width='1080' src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/Preview/bd.gif"></img>
+    <p>English Version</p>
+    <img style='border-radius:5px' width='1080' src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/Preview/bd_en.gif"></img>
     <br><br>
-    <img style='border-radius:5px' src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/Preview/dark.jpg"></img>
+    <p>Persian Version</p>
+    <img style='border-radius:5px' width='1080' src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/Preview/bd_pa.gif"></img>
     <br><br>
-    <img style='border-radius:5px' src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/Preview/light.jpg"></img>
+    <img style='border-radius:5px' src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/Preview/dark_en.jpg"></img>
+    <br><br>
+    <img style='border-radius:5px' src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/Preview/dark_pa.jpg"></img>
+    <br><br>
+    <img style='border-radius:5px' src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/Preview/light_en.jpg"></img>
+    <br><br>
+    <img style='border-radius:5px' src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/Preview/light_pa.jpg"></img>
 </div>
 <hr>
 
@@ -23,6 +32,7 @@
 - [x] Able To Download Highest & Lowest Quality
 - [x] Able To Choose Between Qualities (From 360p to 1080p)
 - [x] Able To Change Between Languages (Persian & English)
+- [x] Able To Open The Chosen Directory
 - [x] Able To Download Audio Only
 - [x] Able To Show Download Staus
 - [x] Able To Set Theme as The System Theme

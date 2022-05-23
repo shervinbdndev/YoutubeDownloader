@@ -5,6 +5,7 @@ try:
     import requests
     import ntkutils
     import webbrowser
+    import subprocess
     import darkdetect
     import customtkinter
     from typing import Any
@@ -147,6 +148,11 @@ class YoutubeDownloader:
                 downloadDirectory = filedialog.askdirectory(initialdir=os.path.join(os.path.abspath(path=os.path.dirname(p=__file__))) , title='Save Video')
                 self.svPath.set(value=downloadDirectory)
                 
+        def openDownloadedVideoPath(arg : str):
+            if (arg == 'open'):
+                path = os.path.normpath(path=self.svPath.get())
+                subprocess.run(args=[os.path.join(os.getenv(key='WINDIR') , 'explorer.exe') , path])
+                
         def changeAppLanguage(arg : Any):
             if (arg == 'pa'):
                 self.persian = True
@@ -165,6 +171,7 @@ class YoutubeDownloader:
                     self.btnPA.configure(text='پارسی' , bg_color = '#1C1C1C')
                     self.btnEN.configure(text='انگلیسی' , bg_color = '#1C1C1C')
                     self.btnME.configure(text='گیتهاب' , bg_color = '#1C1C1C')
+                    self.btnOpenFile.configure(text='بازکردن' , bg_color = '#1C1C1C')
                 elif (darkdetect.isLight()):
                     self.btnDownload.configure(text='دانلود' , bg_color = '#FAFAFA')
                     self.btnPaste.configure(text='الصاق' , bg_color = '#FAFAFA')
@@ -172,6 +179,7 @@ class YoutubeDownloader:
                     self.btnPA.configure(text='پارسی' , bg_color = '#FAFAFA')
                     self.btnEN.configure(text='انگلیسی' , bg_color = '#FAFAFA')
                     self.btnME.configure(text='گیتهاب' , bg_color = '#FAFAFA')
+                    self.btnOpenFile.configure(text='بازکردن' , bg_color = '#FAFAFA')
                 self.status.configure(text='وضعیت :')
                 self.downloadStatus.configure(text='نامعلوم')
                 self.highestQualityBtn.configure(text='کیفیت بالاترین')
@@ -201,10 +209,15 @@ class YoutubeDownloader:
                     self.btnPA.configure(text='Persian' , bg_color = '#1C1C1C')
                     self.btnEN.configure(text='English' , bg_color = '#1C1C1C')
                     self.btnME.configure(text='Github' , bg_color = '#1C1C1C')
+                    self.btnOpenFile.configure(text='Open' , bg_color = '#1C1C1C')
                 elif (darkdetect.isLight()):
                     self.btnDownload.configure(text='Download' , bg_color = '#FAFAFA')
                     self.btnPaste.configure(text='Paste' , bg_color = '#FAFAFA')
                     self.btnBrowse.configure(text='Browse' , bg_color = '#FAFAFA')
+                    self.btnPA.configure(text='Persian' , bg_color = '#FAFAFA')
+                    self.btnEN.configure(text='English' , bg_color = '#FAFAFA')
+                    self.btnME.configure(text='Github' , bg_color = '#FAFAFA')
+                    self.btnOpenFile.configure(text='Open' , bg_color = '#FAFAFA')
                 self.status.configure(text='Status :')
                 self.downloadStatus.configure(text='Not Using')
                 self.highestQualityBtn.configure(text='Highest Quality')
@@ -216,10 +229,7 @@ class YoutubeDownloader:
                 self.labelVideoID.configure(text='Video ID :')
                 self.labelChannelID.configure(text='Channel ID :')
                 self.labelLiveContent.configure(text='Live Content :')
-                self.labelLengthSize.configure(text='Length Size :')
-                self.btnPA.configure(text='Persian' , bg_color = '#FAFAFA')
-                self.btnEN.configure(text='English' , bg_color = '#FAFAFA')
-                self.btnME.configure(text='Github' , bg_color = '#FAFAFA')
+                self.labelLengthSize.configure(text='Video Size :')
                 
         def startDownload():
             startThread = Thread(target=downloadVideo)
@@ -507,11 +517,11 @@ class YoutubeDownloader:
                     
         self.status = Label(master=self.tabDownload , text='Status :' , font=('normal' , 12 , BOLD))
         
-        self.status.place(x=315 , y=180)
+        self.status.place(x=290 , y=180)
                 
-        self.downloadStatus = Label(master=self.tabDownload , text=f'Not Using' , foreground='#b59b2a' , font=('normal' , 10 , BOLD))
+        self.downloadStatus = Label(master=self.tabDownload , text=f'Not Using' , foreground='#b59b2a' , font=('normal' , 9 , BOLD))
         
-        self.downloadStatus.place(x=430 , y=192 , anchor=tkinter.CENTER)
+        self.downloadStatus.place(x=392 , y=192 , anchor=tkinter.CENTER)
             
         self.videoLinkLabel = Label(master=self.tabDownload , text='Video Link :' , font=('normal' , 12 , BOLD))
         
@@ -573,6 +583,17 @@ class YoutubeDownloader:
         )
         
         self.btnDownload.place(x=295 , y=225)
+        
+        self.btnOpenFile = CTkButton(
+            master=self.tabDownload ,
+            text='Open' ,
+            corner_radius=5 ,
+            width=80 ,
+            command=lambda:openDownloadedVideoPath(arg='open') ,
+            cursor='hand2'
+        )
+        
+        self.btnOpenFile.place(x=440 , y=177)
         
         self.highestQualityBtn = CTkCheckBox(
             master=self.tabDownload ,
@@ -718,7 +739,7 @@ class YoutubeDownloader:
         
         self.svLiveContent.place(x=140 , y=190 + 5)
         
-        self.labelLengthSize = Label(master=self.tabVidInfo , text='Length Size :' , font=('normal' , 12 , BOLD))
+        self.labelLengthSize = Label(master=self.tabVidInfo , text='Video Size :' , font=('normal' , 12 , BOLD))
         
         self.labelLengthSize.place(x=2 , y=225 + 5)
         
