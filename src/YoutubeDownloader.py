@@ -126,6 +126,7 @@ class YoutubeDownloader:
                 self.svLiveContent.configure(background='#1C1C1C' , foreground='#ffffff')
                 self.labelIsPrivate.configure(background='#1C1C1C' , foreground='#1D94D0')
                 self.svIsPrivate.configure(background='#1C1C1C' , foreground='#ffffff')
+                self.btnME.configure(bg_color='#1C1C1C' , fg_color='#1D94D0')
                 ntkutils.dark_title_bar(window=self.root)
             self.tester.after(ms=2555 , func=getTheme)
             
