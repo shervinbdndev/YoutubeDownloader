@@ -2,14 +2,6 @@
   <a href="https://github.com/shervinbdndev/YoutubeDownloader">
     <img src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/src/images/logo%403x.png" alt="Logo" width="180">
   </a>
-</div>
-<h1 align='center' style="font-size:5rem"><b>Youtube Downloader</b><br>v 2.0.2</h1>
-<h2 align='center'>
-    A Windows Open Source Application For Downloading Videos From Youtube
-</h2>
-<br><br>
-
-<div align="center">
 
 Operating System  |  Version  |  Download
 ------------- | ------------- | -------------
@@ -17,6 +9,10 @@ Windows 11  |  2.0.2  | [64Bit](https://github.com/shervinbdndev/YoutubeDownload
 Windows 10  |  2.0.2  | [64Bit](https://github.com/shervinbdndev/YoutubeDownloader/archive/refs/heads/master.zip)
 
 </div>
+<h1 align='center' style="font-size:5rem"><b>Youtube Downloader</b><br>v 2.0.2</h1>
+<h2 align='center'>
+    A Windows Open Source Application For Downloading Videos From Youtube
+</h2>
 
 <br><br>
 <div align='center'>
