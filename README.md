@@ -9,10 +9,14 @@
 </h2>
 <br><br>
 
-Operatin System  |  Download
+<div align="center">
+
+Operating System  |  Download
 ------------- | -------------
 Windows 11  | [64Bit](https://github.com/shervinbdndev/YoutubeDownloader/archive/refs/heads/master.zip)
 Windows 10  | [64Bit](https://github.com/shervinbdndev/YoutubeDownloader/archive/refs/heads/master.zip)
+
+</div>
 
 <br><br>
 <div align='center'>
