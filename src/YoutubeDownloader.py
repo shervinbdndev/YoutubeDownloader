@@ -90,7 +90,7 @@ class YoutubeDownloader:
                 self.labelLiveContent.configure(background='#FAFAFA' , foreground='#1D94D0')
                 self.svLiveContent.configure(background='#FAFAFA' , foreground='#000000')
                 self.labelIsPrivate.configure(background='#FAFAFA' , foreground='#1D94D0')
-                self.svIsPrivate.configure(background='#FAFAFA' , foreground='#000000')
+                self.svVideoSize.configure(background='#FAFAFA' , foreground='#000000')
             elif (darkdetect.isDark()):
                 sv_ttk.set_theme(theme='dark')
                 customtkinter.set_appearance_mode(mode_string='dark')
@@ -125,7 +125,7 @@ class YoutubeDownloader:
                 self.labelLiveContent.configure(background='#1C1C1C' , foreground='#1D94D0')
                 self.svLiveContent.configure(background='#1C1C1C' , foreground='#ffffff')
                 self.labelIsPrivate.configure(background='#1C1C1C' , foreground='#1D94D0')
-                self.svIsPrivate.configure(background='#1C1C1C' , foreground='#ffffff')
+                self.svVideoSize.configure(background='#1C1C1C' , foreground='#ffffff')
                 self.btnME.configure(bg_color='#1C1C1C' , fg_color='#1D94D0')
                 ntkutils.dark_title_bar(window=self.root)
             self.tester.after(ms=2555 , func=getTheme)
@@ -230,7 +230,7 @@ class YoutubeDownloader:
                 self.svVideoID.configure(text=YouTube(url=self.svLink.get()).vid_info['videoDetails']['videoId'])
                 self.svChannelID.configure(text=YouTube(url=self.svLink.get()).vid_info['videoDetails']['channelId'])
                 self.svLiveContent.configure(text=[True if str(YouTube(url=self.svLink.get()).vid_info['videoDetails']['isLiveContent']) == 1 else False])
-                self.svIsPrivate.configure(text=[True if str(YouTube(url=self.svLink.get()).vid_info['videoDetails']['isPrivate']) == 1 else False])
+                self.svVideoSize.configure(text=[True if str(YouTube(url=self.svLink.get()).vid_info['videoDetails']['isPrivate']) == 1 else False])
             except requests.ConnectionError as e:
                 self.svVideoAuthor.configure(text=e.__doc__)
                 self.svViewsCount.configure(text=e.__doc__)
@@ -238,7 +238,7 @@ class YoutubeDownloader:
                 self.svVideoID.configure(text=e.__doc__)
                 self.svChannelID.configure(text=e.__doc__)
                 self.svLiveContent.configure(text=e.__doc__)
-                self.svIsPrivate.configure(text=e.__doc__)
+                self.svVideoSize.configure(text=e.__doc__)
                 
         def downloadVideo():
             if (self.svLink.get() is not None):
@@ -676,9 +676,9 @@ class YoutubeDownloader:
         
         self.labelIsPrivate.place(x=2 , y=225 + 5)
         
-        self.svIsPrivate = Label(master=self.tabVidInfo , text=None , font=('normal' , 10 , BOLD))
+        self.svVideoSize = Label(master=self.tabVidInfo , text=None , font=('normal' , 10 , BOLD))
         
-        self.svIsPrivate.place(x=97 , y=225 + 5)
+        self.svVideoSize.place(x=97 , y=225 + 5)
         
         getTheme()
         
