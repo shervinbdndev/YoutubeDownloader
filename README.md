@@ -60,8 +60,6 @@ Windows 10  | Latest 2.0.2  | [64Bit](https://github.com/shervinbdndev/YoutubeDo
 <img src="https://img.shields.io/badge/Intel-Core_i5_10700K-0071C5?style=for-the-badge&logo=intel&logoColor=white"></img>
 <img src="https://img.shields.io/badge/NVIDIA-RTX2060 OC-76B900?style=for-the-badge&logo=nvidia&logoColor=white"></img>
 <img src="https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white"></img>
-<img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black"></img>
-<img src="https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white"></img>
 <hr>
 
 
@@ -82,8 +80,6 @@ For Running in Python Console 👇
 <br>
 
 Windows : `` py -m pip install -r requirements.txt ``
-
-Linux : `` python3 -m pip install -r requrements.txt ``
 
 <br>
 
