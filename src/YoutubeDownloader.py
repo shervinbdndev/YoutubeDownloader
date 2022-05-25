@@ -22,8 +22,8 @@ try:
     from customtkinter.widgets.customtkinter_button import CTkButton
     from customtkinter.widgets.customtkinter_checkbox import CTkCheckBox
 
-except ModuleNotFoundError.__doc__ as mnfe:
-    raise mnfe
+except ModuleNotFoundError.__doc__:
+    raise RuntimeError(args='Cannot Run Application') from None
 
 finally:
     ... 
@@ -48,6 +48,7 @@ class YoutubeDownloader:
     def __init__(self : Self) -> None:
         super(YoutubeDownloader , self).__init__()
         self.root = tkinter.Tk()
+        self.root.title(string='Youtube Downloader')
         self.root.geometry(newGeometry='555x320')
         self.root.resizable(width=False , height=False)
         self.rootTabControl = Notebook(master=self.root)
