@@ -1,3 +1,6 @@
+import sys
+
+
 try:
     import os
     import sv_ttk
@@ -48,7 +51,11 @@ class YoutubeDownloader:
     def __init__(self : Self) -> None:
         super(YoutubeDownloader , self).__init__()
         self.root = tkinter.Tk()
-        self.root.title(string='Youtube Downloader')
+        self.systemVer = os.popen(cmd='wmic os get osarchitecture').read()[18:24]
+        if (self.systemVer == '32-bit'):
+            self.root.title(string=f'Youtube Downloader {"".join(str(bitVer) for bitVer in self.systemVer)}')
+        else:
+            sys.exit(0)
         self.root.geometry(newGeometry='555x320')
         self.root.resizable(width=False , height=False)
         self.rootTabControl = Notebook(master=self.root)
