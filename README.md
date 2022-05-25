@@ -71,7 +71,7 @@ First of All Clone the project from here  ``~ git clone https://github.com/sherv
 
 <br>
 
-Then go To Project's Directory with  ``~ cd YoutubeDownloader-master`` No Matters if Your Using Windows or Linux.
+Then go To Project's Directory with  ``~ cd YoutubeDownloader-master``
 
 <br>
 
@@ -79,7 +79,7 @@ For Running in Python Console 👇
 
 <br>
 
-Windows : `` py -m pip install -r requirements.txt ``
+Windows : `` py -m pip install -r requirements.txt `` & `` cd .\src\ ``
 
 <br>
 
@@ -88,7 +88,5 @@ Then Run the Code Below 👇
 <br>
 
 ```py
-~ python YoutubeDownloader.py
+~ py YoutubeDownloader.py
 ```
-
-If You Want you can Use The Executable file, Go to `` YoutubeDownloader `` and run `` YoutubeDownloader.exe ``
