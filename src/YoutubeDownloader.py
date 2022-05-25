@@ -52,7 +52,7 @@ class YoutubeDownloader:
         super(YoutubeDownloader , self).__init__()
         self.root = tkinter.Tk()
         self.systemVer = os.popen(cmd='wmic os get osarchitecture').read()[18:24]
-        if (self.systemVer == '32-bit'):
+        if (self.systemVer == '64-bit'):
             self.root.title(string=f'Youtube Downloader {"".join(str(bitVer) for bitVer in self.systemVer)}')
         else:
             sys.exit(0)
