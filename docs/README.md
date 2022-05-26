@@ -17,7 +17,6 @@ Windows 10  | Latest 2.0.2  | [64Bit](https://codeload.github.com/shervinbdndev/
 
 <br><br><br>
 <div align='center'>
-    <p>English Version</p>
     <p>English Dark & Light Modes</p>
     <img style='border-radius:5px' src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/Preview/dark_en.jpg"></img>
     <br>
