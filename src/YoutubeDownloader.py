@@ -1,7 +1,6 @@
 try:
     import os
     import sv_ttk
-    import asyncio
     import tkinter
     import requests
     import ntkutils
@@ -146,12 +145,11 @@ class YoutubeDownloader:
                 self.btnME.configure(bg_color='#1C1C1C' , fg_color='#1D94D0')
                 ntkutils.dark_title_bar(window=self.root)
                 
-        async def setBySystemTheme():
+        def setBySystemTheme():
             if (darkdetect.isLight()):
                 getTheme(arg='light')
             elif (darkdetect.isDark()):
                 getTheme(arg='dark')
-            return 1
             
         def browseFile(arg : Any):
             if (arg == 'browse'):
@@ -757,7 +755,7 @@ class YoutubeDownloader:
         
         self.svVideoSize.place(x=110 , y=225 + 5)
         
-        asyncio.run(setBySystemTheme())
+        setBySystemTheme()
         
         self.root.mainloop()
         
