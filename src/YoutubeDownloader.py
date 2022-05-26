@@ -1,6 +1,7 @@
 try:
     import os
     import sv_ttk
+    import asyncio
     import tkinter
     import requests
     import ntkutils
@@ -52,24 +53,27 @@ class YoutubeDownloader:
         self.root.geometry(newGeometry='555x320')
         self.root.resizable(width=False , height=False)
         self.rootTabControl = Notebook(master=self.root)
+        """self.root.wm_attributes('-alpha' , 0.95)"""
         self.tester = Label(master=self.root)
         self.svLink = StringVar(master=self.root)
         self.svPath = StringVar(master=self.root)
         self.svCombo = StringVar(master=self.root)
         self.tabDownload = Frame(master=self.rootTabControl)
         self.tabVidInfo = Frame(master=self.rootTabControl)
-        self.tabLanguage = Frame(master=self.root)
-        self.tabAbout = Frame(master=self.root)
+        self.tabLanguage = Frame(master=self.rootTabControl)
+        """self.tabCustomize = Frame(master=self.rootTabControl)"""
+        self.tabAbout = Frame(master=self.rootTabControl)
         self.rootTabControl.add(child=self.tabDownload , text='Download')
         self.rootTabControl.add(child=self.tabVidInfo , text='Video Information')
         self.rootTabControl.add(child=self.tabLanguage , text='Language')
+        """self.rootTabControl.add(child=self.tabCustomize , text='Customize')"""
         self.rootTabControl.add(child=self.tabAbout , text='About')
         self.rootTabControl.pack(expand=1 , fill=BOTH)
         self.persian : bool = False
         self.english : bool = True
         
-        def getTheme():
-            if (darkdetect.isLight()):
+        def getTheme(arg : str):
+            if (arg == 'light'):
                 sv_ttk.set_theme(theme='light')
                 customtkinter.set_appearance_mode(mode_string='light')
                 self.root.configure(background='#FAFAFA')
@@ -104,7 +108,7 @@ class YoutubeDownloader:
                 self.svLiveContent.configure(background='#FAFAFA' , foreground='#000000')
                 self.labelLengthSize.configure(background='#FAFAFA' , foreground='#1D94D0')
                 self.svVideoSize.configure(background='#FAFAFA' , foreground='#000000')
-            elif (darkdetect.isDark()):
+            elif (arg == 'dark'):
                 sv_ttk.set_theme(theme='dark')
                 customtkinter.set_appearance_mode(mode_string='dark')
                 self.root.configure(background='#1C1C1C')
@@ -141,7 +145,13 @@ class YoutubeDownloader:
                 self.svVideoSize.configure(background='#1C1C1C' , foreground='#ffffff')
                 self.btnME.configure(bg_color='#1C1C1C' , fg_color='#1D94D0')
                 ntkutils.dark_title_bar(window=self.root)
-            self.tester.after(ms=2555 , func=getTheme)
+                
+        async def setBySystemTheme():
+            if (darkdetect.isLight()):
+                getTheme(arg='light')
+            elif (darkdetect.isDark()):
+                getTheme(arg='dark')
+            return 1
             
         def browseFile(arg : Any):
             if (arg == 'browse'):
@@ -747,7 +757,7 @@ class YoutubeDownloader:
         
         self.svVideoSize.place(x=110 , y=225 + 5)
         
-        getTheme()
+        asyncio.run(setBySystemTheme())
         
         self.root.mainloop()
         
