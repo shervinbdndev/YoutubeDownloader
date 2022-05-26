@@ -41,6 +41,7 @@ Windows 10  | Latest 2.0.2  | [64Bit](https://codeload.github.com/shervinbdndev/
 - [x] Able To Download Audio Only
 - [x] Able To Show Download Staus
 - [x] Able To Set Theme as The System Theme
+- [x] Transparent Window is Available Now
 
 <hr>
 <br><br><br><br>
