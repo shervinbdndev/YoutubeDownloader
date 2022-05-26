@@ -52,7 +52,7 @@ class YoutubeDownloader:
         self.root.geometry(newGeometry='555x320')
         self.root.resizable(width=False , height=False)
         self.rootTabControl = Notebook(master=self.root)
-        self.root.iconbitmap(bitmap=r'images/icon.ico')
+        self.root.iconbitmap(bitmap=os.path.join(os.path.abspath(os.path.dirname(__file__)) , r'images/icon.ico'))
         """self.root.wm_attributes('-alpha' , 0.95)"""
         self.tester = Label(master=self.root)
         self.svLink = StringVar(master=self.root)
