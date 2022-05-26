@@ -18,14 +18,14 @@ Windows 10  | Latest 2.1.2  | [64Bit](https://codeload.github.com/shervinbdndev/
 <br><br><br>
 <div align='center'>
     <p>English Dark & Light Modes</p>
-    <img style='border-radius:5px' src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/Preview/dark_en.jpg"></img>
+    <img style='border-radius:5px' src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/view/dark_en.jpg"></img>
     <br>
-    <img style='border-radius:5px' src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/Preview/light_en.jpg"></img>
+    <img style='border-radius:5px' src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/view/light_en.jpg"></img>
     <br><br><br>
     <p>Persian Dark & Light Modes</p>
-    <img style='border-radius:5px' src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/Preview/dark_pa.jpg"></img>
+    <img style='border-radius:5px' src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/view/dark_pa.jpg"></img>
     <br>
-    <img style='border-radius:5px' src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/Preview/light_pa.jpg"></img>
+    <img style='border-radius:5px' src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/view/light_pa.jpg"></img>
 </div>
 <hr>
 
