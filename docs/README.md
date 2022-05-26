@@ -18,11 +18,6 @@ Windows 10  | Latest 2.0.2  | [64Bit](https://codeload.github.com/shervinbdndev/
 <br><br><br>
 <div align='center'>
     <p>English Version</p>
-    <img style='border-radius:5px' width='1080' src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/Preview/bd_en.gif"></img>
-    <br><br><br>
-    <p>Persian Version</p>
-    <img style='border-radius:5px' width='1080' src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/Preview/bd_pa.gif"></img>
-    <br><br><br>
     <p>English Dark & Light Modes</p>
     <img style='border-radius:5px' src="https://github.com/shervinbdndev/YoutubeDownloader/blob/master/Preview/dark_en.jpg"></img>
     <br>
