@@ -72,6 +72,7 @@ class YoutubeDownloader:
         self.rootTabControl.pack(expand=1 , fill=BOTH)
         self.persian : bool = False
         self.english : bool = True
+        self.fileSize : int = 0
         
         def getTheme(arg : str):
             if (arg == 'light'):
@@ -529,9 +530,9 @@ class YoutubeDownloader:
         
         self.status.place(x=290 , y=180)
                 
-        self.downloadStatus = Label(master=self.tabDownload , text=f'Not Using' , foreground='#b59b2a' , font=('normal' , 9 , BOLD))
+        self.downloadStatus = Label(master=self.tabDownload , text='Not Using' , font=('normal' , 9 , BOLD) , foreground='#b59b2a')
         
-        self.downloadStatus.place(x=392 , y=192 , anchor=tkinter.CENTER)
+        self.downloadStatus.place(x=390 , y=192 , anchor=tkinter.CENTER)
             
         self.videoLinkLabel = Label(master=self.tabDownload , text='Video Link :' , font=('normal' , 12 , BOLD))
         
