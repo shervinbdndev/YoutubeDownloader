@@ -10,6 +10,7 @@ try:
     import customtkinter
     from typing import Any
     from pytube import YouTube
+    from typing import Literal
     from threading import Thread
     from tkinter import filedialog
     from tkinter import messagebox
@@ -18,9 +19,9 @@ try:
     from tkinter.font import (BOLD , NORMAL)
     from tkinter.ttk import (Notebook , Frame)
     from tkinter.__init__ import (StringVar, Label)
-    from customtkinter.widgets.customtkinter_entry import CTkEntry
-    from customtkinter.widgets.customtkinter_button import CTkButton
-    from customtkinter.widgets.customtkinter_checkbox import CTkCheckBox
+    from customtkinter.widgets.ctk_entry import CTkEntry
+    from customtkinter.widgets.ctk_button import CTkButton
+    from customtkinter.widgets.ctk_checkbox import CTkCheckBox
 
 except ModuleNotFoundError.__doc__:
     raise RuntimeError(args='Cannot Run Application') from None
@@ -45,7 +46,7 @@ class LengthSize:
 
 
 class YoutubeDownloader:
-    def __init__(self : Self) -> None:
+    def __init__(self : Self) -> Literal[None]:
         super(YoutubeDownloader , self).__init__()
         self.root = tkinter.Tk()
         self.root.title(string='Youtube Downloader')
@@ -74,7 +75,7 @@ class YoutubeDownloader:
         self.english : bool = True
         self.fileSize : int = 0
         
-        def getTheme(arg : str):
+        def getTheme(arg : str) -> Literal[None]:
             if (arg == 'light'):
                 sv_ttk.set_theme(theme='light')
                 customtkinter.set_appearance_mode(mode_string='light')
@@ -148,23 +149,23 @@ class YoutubeDownloader:
                 self.btnME.configure(bg_color='#1C1C1C' , fg_color='#1D94D0')
                 ntkutils.dark_title_bar(window=self.root)
                 
-        def setBySystemTheme():
+        def setBySystemTheme() -> Literal[None]:
             if (darkdetect.isLight()):
                 getTheme(arg='light')
             elif (darkdetect.isDark()):
                 getTheme(arg='dark')
             
-        def browseFile(arg : Any):
+        def browseFile(arg : Any) -> Literal[None]:
             if (arg == 'browse'):
                 downloadDirectory = filedialog.askdirectory(initialdir=os.path.join(os.path.abspath(path=os.path.dirname(p=__file__))) , title='Save Video')
                 self.svPath.set(value=downloadDirectory)
                 
-        def openDownloadedVideoPath(arg : str):
+        def openDownloadedVideoPath(arg : str) -> Literal[None]:
             if (arg == 'open'):
                 path = os.path.normpath(path=self.svPath.get())
                 subprocess.run(args=[os.path.join(os.getenv(key='WINDIR') , 'explorer.exe') , path])
                 
-        def changeAppLanguage(arg : Any):
+        def changeAppLanguage(arg : Any) -> Literal[None]:
             if (arg == 'pa'):
                 self.persian = True
                 self.english = False
@@ -242,20 +243,20 @@ class YoutubeDownloader:
                 self.labelLiveContent.configure(text='Live Content :')
                 self.labelLengthSize.configure(text='Video Size :')
                 
-        def startDownload():
+        def startDownload() -> Literal[None]:
             startThread = Thread(target=downloadVideo)
             startThread.start()
             
-        def pasteContent(arg : Any):
+        def pasteContent(arg : Any) -> Literal[None]:
             if (arg == 'paste'):
                 pastedContent = self.root.clipboard_get()
                 self.svLink.set(value=pastedContent)
                 
-        def aboutMe(arg : Any):
+        def aboutMe(arg : Any) -> Literal[None]:
             if (arg == 'me'):
                 webbrowser.open(url='https://github.com/shervinbdndev')
             
-        def getVideoInfo():
+        def getVideoInfo() -> Literal[None]:
             try:
                 self.svVideoAuthor.configure(text=YouTube(url=self.svLink.get()).vid_info['videoDetails']['author'])
                 self.svViewsCount.configure(text=f"{int(YouTube(url=self.svLink.get()).vid_info['videoDetails']['viewCount']):,}")
@@ -272,7 +273,7 @@ class YoutubeDownloader:
                 self.svLiveContent.configure(text=e.__doc__)
                 self.svVideoSize.configure(text=e.__doc__)
                 
-        def downloadVideo():
+        def downloadVideo() -> Literal[None]:
             if (self.svLink.get() is not None):
                 if (self.highestQualityBtn.check_state == True):
                     try:
@@ -438,7 +439,7 @@ class YoutubeDownloader:
             else:
                 messagebox.askokcancel(title='Invalid Link' , message='Please Enter a Valid Link')
         
-        def checkBoxesChecked():
+        def checkBoxesChecked() -> Literal[None]:
             if ((self.english is True) and (self.persian is False)):
                 if (self.highestQualityBtn.check_state is True):
                     self.labelCheckBoxSelectInfo.configure(text='You Can Only Select Highest')
